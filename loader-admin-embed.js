@@ -233,17 +233,18 @@
       var uid = document.getElementById('laUid').value.trim();
       var vers = document.getElementById('laVers').value.split(',').map(function (v) { return v.trim(); }).filter(Boolean);
       if (!uid) { toast('Введите UID или Username', false); return; }
-      // Резолвим имя -> uid через список пользователей
-      api('/admin/users').then(function (users) {
-        var u = (users.users || []).find(function (x) { return String(x.uid) === uid || x.username === uid; });
-        var ruid = u ? u.uid : uid, rname = u ? u.username : uid;
+      api('/admin/users').then(function (data) {
+        var u = (data.users || []).find(function (x) { return String(x.id) === uid || String(x.uid) === uid || x.username === uid; });
+        var ruid = u ? String(u.id || u.uid) : uid;
+        var rname = u ? u.username : uid;
         return api('/admin/loader/access', { method: 'POST', body: JSON.stringify({ uid: ruid, username: rname, versions: vers, action: 'grant' }) })
-          .then(function () { toast('Доступ выдан: ' + rname); });
-      }).then(function () {
-        document.getElementById('laUid').value = '';
-        document.getElementById('laVers').value = '';
-        loadAccess();
-      }).catch(function (e) { if (e.message !== 'forbidden') toast('Ошибка', false); });
+          .then(function () {
+            toast('Доступ выдан: ' + rname);
+            document.getElementById('laUid').value = '';
+            document.getElementById('laVers').value = '';
+            loadAccess();
+          });
+      }).catch(function (e) { if (e.message !== 'forbidden') toast('Ошибка при выдаче доступа', false); });
     };
 
     document.getElementById('laRevoke').onclick = function () {
