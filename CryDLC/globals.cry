@@ -1,0 +1,81 @@
+{
+  "config": "default",
+  "theme": "Blue",
+  "language": "RUSSIAN",
+  "draggables": {
+    "Potions": {
+      "x": 228.23094,
+      "y": 30.502272
+    },
+    "TargetHud": {
+      "x": 4.9446845,
+      "y": 159.54745
+    },
+    "HelperBinds": {
+      "x": 90.0,
+      "y": 30.0
+    },
+    "Cooldowns": {
+      "x": 108.0,
+      "y": 303.0
+    },
+    "StaffList": {
+      "x": 155.3286,
+      "y": 52.921658
+    },
+    "KeyBinds": {
+      "x": 478.40714,
+      "y": 107.68338
+    },
+    "Information": {
+      "x": 50.0,
+      "y": 100.0
+    },
+    "Notifications": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "WaterMark": {
+      "x": 10.0,
+      "y": 10.0
+    }
+  },
+  "hud": {
+    "waterMark": {
+      "unusualRectType": true,
+      "showFps": true,
+      "showMs": true,
+      "showServer": true,
+      "showTps": true
+    },
+    "keyBinds": {
+      "unusualRectType": true
+    },
+    "helperBinds": {
+      "unusualRectType": true
+    },
+    "potions": {
+      "unusualRectType": true
+    },
+    "cooldowns": {
+      "unusualRectType": false
+    },
+    "notifications": {
+      "unusualRectType": true
+    },
+    "targetHud": {
+      "unusualRectType": true,
+      "headParticlesEnabled": true,
+      "healthBarStyleEnabled": false
+    },
+    "information": {
+      "unusualRectType": true
+    },
+    "staffList": {
+      "unusualRectType": true
+    }
+  },
+  "friends": [],
+  "staffs": [],
+  "macros": []
+}

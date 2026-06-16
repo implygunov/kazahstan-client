@@ -1,0 +1,26 @@
+САЙТ crydcp
+
+СУРС ПОЛНЫЙ
+HTML
+JS
+CSS
+ШРИФТЫ Manrope
+ИКОНКИ
+БЭКЕНД 32 API
+БД JSON
+АДМИНКА
+
+ЛОГИН admin
+ПАРОЛЬ admin123
+РОЛЬ DEVELOPER
+
+ЛОГИН moder
+ПАРОЛЬ admin123
+РОЛЬ MODERATOR
+
+ЛОГИН user
+ПАРОЛЬ admin123
+РОЛЬ DEFAULT
+
+ЗАПУСК start.bat
+ПОРТ 5000

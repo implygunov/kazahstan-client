@@ -1,0 +1,1144 @@
+{
+  "config": "default",
+  "modules": {
+    "AntiBot": {
+      "toggled": false,
+      "bind": -1,
+      "settings": {
+        "Скрывать ботов": true,
+        "Строгая проверка": true,
+        "Back Hit Bots": true
+      }
+    },
+    "AimBot": {
+      "toggled": false,
+      "bind": -1,
+      "settings": {
+        "Типы целей": {
+          "Игроки": true,
+          "В броне": true,
+          "Без брони": false,
+          "Мобы": false,
+          "Зомби": false
+        },
+        "Дистанция": 66.0,
+        "Время наводки (тики)": 2.0,
+        "Тихие повороты": true,
+        "Показать прицел": true,
+        "Размер прицела": 1.0
+      }
+    },
+    "AirJump": {
+      "toggled": false,
+      "bind": -1,
+      "settings": {
+        "Режим": "Polar Block Collision"
+      }
+    },
+    "AirStuck": {
+      "toggled": false,
+      "bind": 334,
+      "settings": {
+        "Мод": "Обычный",
+        "Отменять пакеты": true,
+        "Свапать элитру": true
+      }
+    },
+    "Arrows": {
+      "toggled": true,
+      "bind": -1,
+      "settings": {
+        "Вид": "Первый",
+        "Радиус": 58.0,
+        "Размер": 13.0,
+        "Свечение": 7.5
+      }
+    },
+    "AttackAura": {
+      "toggled": true,
+      "bind": 82,
+      "settings": {
+        "Ротация": "SpookyTime",
+        "Поведение ротации": "Снапы",
+        "Коррекция движения": "Свободная",
+        "Предикт": false,
+        "Предикт значение": 3.0,
+        "Умное наведение": true,
+        "Assist радиус": 0.0,
+        "Assist скорость в цели": 0.25,
+        "Assist скорость земля": 2.0,
+        "Assist скорость воздух": 2.0,
+        "Assist скорость элитры": 2.0,
+        "Таргеты": {
+          "Игроки": true,
+          "Невидимки": true,
+          "Мирные": false,
+          "Мобы": true
+        },
+        "Дистанция атаки": 2.6000001,
+        "Дистанция наводки": 2.75,
+        "Дистанция на элитрах": 75.450005,
+        "Криты": "Умные криты",
+        "Сброс спринта": true,
+        "Не бить когда ешь": false,
+        "Бить через стены": true,
+        "Обход рв стен": false,
+        "Смотреть вниз": false,
+        "Проверка на наведение": false,
+        "Отжимать щит": false,
+        "Ломать щит": true,
+        "Приоритет": "Никакой"
+      }
+    },
+    "AutoAccept": {
+      "toggled": false,
+      "bind": -1,
+      "settings": {
+        "Только друзья": false
+      }
+    },
+    "AutoArmor": {
+      "toggled": false,
+      "bind": -1,
+      "settings": {
+        "Задержка": 25.0
+      }
+    },
+    "AutoEat": {
+      "toggled": false,
+      "bind": -1,
+      "settings": {
+        "Есть от голода": 5.0
+      }
+    },
+    "AutoBuy": {
+      "toggled": false,
+      "bind": -1,
+      "settings": {
+        "Бинд гуи": -1
+      }
+    },
+    "AutoDuel": {
+      "toggled": false,
+      "bind": -1,
+      "settings": {
+        "Режим": "Шары"
+      }
+    },
+    "AutoLeave": {
+      "toggled": false,
+      "bind": -1,
+      "settings": {
+        "Дистанция срабатывания": 5.0,
+        "Тип выхода": "В мейн меню",
+        "Выключать после выхода": true
+      }
+    },
+    "AutoExplosion": {
+      "toggled": false,
+      "bind": -1,
+      "settings": {
+        "Режим взрыва": "Авто",
+        "Бинд": -1,
+        "Взрыв по ПКМ": true,
+        "Оставлять кристалл": false,
+        "Обход Grim": true,
+        "Задержка действий": 50.0
+      }
+    },
+    "AutoPotion": {
+      "toggled": true,
+      "bind": -1,
+      "settings": {
+        "Кидать": {
+          "Зелье силы": true,
+          "Зелье скорости": true,
+          "Зелье огнестойкости": true
+        },
+        "Выключать после использования": false
+      }
+    },
+    "AutoForest": {
+      "toggled": false,
+      "bind": -1,
+      "settings": {
+        "Режим ломания": "Обычный",
+        "Пакетов в секунду": 100.0,
+        "Радиус": 4.0,
+        "Махать рукой": true,
+        "Авто продажа дерева": true,
+        "AutoPay": false,
+        "Сохранять визуализацию": true,
+        "Сумма перевода": 1000.0,
+        "Задержка": 20.0
+      }
+    },
+    "AutoJoin": {
+      "toggled": false,
+      "bind": -1,
+      "settings": {
+        "Гриф": 5.0
+      }
+    },
+    "AutoPvP": {
+      "toggled": false,
+      "bind": -1,
+      "settings": {
+        "С кем идти...": {
+          "CUSTOM": false,
+          "D.HELPER": false,
+          "FROSTINE": false,
+          "SPRING": false,
+          "AUTUMN": false,
+          "GLADIATOR": false,
+          "PALADIN": false,
+          "LUXE": false,
+          "STAFF": false,
+          "SUPPORT": false,
+          "ETERNITY": false,
+          "OVERLORD": false,
+          "D.ADMIN": false,
+          "POVELITEL": false,
+          "IMPERATOR": false,
+          "LEGENDA": false,
+          "PRAVITEL": false,
+          "PHOENIX": false,
+          "PLAYER": false
+        }
+      }
+    },
+    "NameProtect": {
+      "toggled": true,
+      "bind": -1,
+      "settings": {
+        "Скрывать друзей": true,
+        "Скрывать гриф": false,
+        "Никнейм": "wonderful"
+      }
+    },
+    "AutoFish": {
+      "toggled": false,
+      "bind": -1,
+      "settings": {
+        "Автоматически брать удочку": true
+      }
+    },
+    "AutoJump": {
+      "toggled": false,
+      "bind": -1,
+      "settings": {}
+    },
+    "AutoSwap": {
+      "toggled": false,
+      "bind": -1,
+      "settings": {
+        "Первый предмет": "Руна",
+        "Второй предмет": "Тотем",
+        "Кнопка свапа": -98,
+        "Обходить Grim": true
+      }
+    },
+    "AutoTool": {
+      "toggled": false,
+      "bind": -1,
+      "settings": {
+        "Пакетный": false,
+        "Видно только для других людей": false
+      }
+    },
+    "AutoTotem": {
+      "toggled": true,
+      "bind": -1,
+      "settings": {
+        "Брать от хп": 6.0,
+        "Хп на элитрах": 10.0,
+        "Сохранять зачар": true,
+        "Обходить Grim": true,
+        "Возвращать тотем": true,
+        "Версия свапа": "1.21.4",
+        "Задержка возврата": 20.0,
+        "Брать от": {
+          "Кристалл рядом": true,
+          "Кристалл в руке": true,
+          "Обсидиан в руке": true,
+          "Падения": true
+        },
+        "Радиус кристалла": 6.0,
+        "Высота падения": 10.0
+      }
+    },
+    "AutoTrap": {
+      "toggled": false,
+      "bind": -1,
+      "settings": {
+        "Мод": "Obsidian",
+        "Дистанция": 3.0,
+        "Бинд": -1,
+        "Из инвентаря": false,
+        "Ротация": true,
+        "Не работать на ботов": true,
+        "Таргеты": {
+          "Игроки": true,
+          "Невидимые": true,
+          "Себя": false
+        }
+      }
+    },
+    "BlockESP": {
+      "toggled": false,
+      "bind": -1,
+      "settings": {
+        "Дистанция": 60.0
+      }
+    },
+    "BlockOverlay": {
+      "toggled": true,
+      "bind": -1,
+      "settings": {
+        "Режим": "Шейдер",
+        "Скорость волн": 1.2,
+        "Частота волн": 1.0,
+        "Скорость нитей": 1.4,
+        "Изгиб нитей": 0.55,
+        "Ширина обводки": 1.1,
+        "Сила свечения": 1.0,
+        "Заливка": 0.6,
+        "Прозрачность": 1.0,
+        "Плавность": 0.24,
+        "Статичная обводка": true
+      }
+    },
+    "ChestStealer": {
+      "toggled": false,
+      "bind": -1,
+      "settings": {
+        "Задержка": 100.0,
+        "Рандомизация": false
+      }
+    },
+    "Chams": {
+      "toggled": false,
+      "bind": -1,
+      "settings": {
+        "Отображать": {
+          "Игроков": true,
+          "Друзей": true,
+          "Себя": false
+        },
+        "Волны": true,
+        "Скорость X": 0.22,
+        "Скорость Y": 0.15,
+        "Размер волн": 1.35,
+        "Плотность волн": 1.15,
+        "Сила волн": 1.0,
+        "Свечение": true,
+        "Сила свечения": 2.0,
+        "Слои свечения": 3.0,
+        "Пульсирование": false,
+        "Скорость пульсации": 2.0,
+        "Скрыть оригинал": false,
+        "Скрывать предметы и плащ": false
+      }
+    },
+    "ClientSounds": {
+      "toggled": true,
+      "bind": -1,
+      "settings": {
+        "Режим": "Первый",
+        "Громкость": 50.0
+      }
+    },
+    "ClickPearl": {
+      "toggled": false,
+      "bind": -1,
+      "settings": {
+        "Кнопка": -1,
+        "Обход": true
+      }
+    },
+    "Cosmetics": {
+      "toggled": true,
+      "bind": -1,
+      "settings": {
+        "Косметика": {
+          "Нимб": true,
+          "Крылья": true,
+          "Крылья 2": false,
+          "Китайская шляпа": true
+        },
+        "Анимация крыльев": true,
+        "Размер": 1.0
+      }
+    },
+    "Cubes": {
+      "toggled": false,
+      "bind": -1,
+      "settings": {
+        "Анимация": "Разлет",
+        "Форма": "Кубы",
+        "Количество": 30.0,
+        "Размер": 1.0,
+        "Скорость": 1.0
+      }
+    },
+    "DeathCoord": {
+      "toggled": false,
+      "bind": -1,
+      "settings": {
+        "Копировать в буфер": true
+      }
+    },
+    "EcOpen": {
+      "toggled": false,
+      "bind": -1,
+      "settings": {
+        "Открыть": -1,
+        "Дистанция": 6.0
+      }
+    },
+    "ElytraBoost": {
+      "toggled": false,
+      "bind": -1,
+      "settings": {
+        "Server": "Custom",
+        "Debug": false,
+        "More BPS Min BPS": 43.0,
+        "More BPS Max BPS": 45.0,
+        "More BPS Bypass Yaw": true,
+        "More BPS Vertical": 0.42,
+        "More BPS Accel": 3.8,
+        "More BPS Smooth": 85.0,
+        "yaw 0 - 5": 1.5,
+        "yaw 5 - 10": 1.5,
+        "yaw 10 - 15": 1.5,
+        "yaw 15 - 20": 1.5,
+        "yaw 20 - 25": 1.5,
+        "yaw 25 - 30": 1.5,
+        "yaw 30 - 35": 1.5,
+        "yaw 35 - 40": 1.5,
+        "yaw 40 - 45": 1.5,
+        "pitch 0 - 5": 1.5,
+        "pitch 5 - 10": 1.5,
+        "pitch 10 - 15": 1.5,
+        "pitch 15 - 20": 1.5,
+        "pitch 20 - 25": 1.5,
+        "pitch 25 - 30": 1.5,
+        "pitch 30 - 35": 1.5,
+        "pitch 35 - 40": 1.5,
+        "pitch 40 - 45": 1.5
+      }
+    },
+    "ElytraMotion": {
+      "toggled": false,
+      "bind": -1,
+      "settings": {
+        "Дистанция до игрока": 3.0,
+        "Обход": false
+      }
+    },
+    "ElytraSwap": {
+      "toggled": false,
+      "bind": -1,
+      "settings": {
+        "Бинд элитры": -1,
+        "Бинд фейерверка": -1,
+        "Авто-взлёт": true,
+        "Обходить Grim": true,
+        "Обходить Граунд": true,
+        "Уведомления": true
+      }
+    },
+    "ElytraSample": {
+      "toggled": false,
+      "bind": -1,
+      "settings": {
+        "Сила предикта": 3.0,
+        "Линия до цели": true,
+        "Толщина линии": 0.2
+      }
+    },
+    "ElytraResolver": {
+      "toggled": false,
+      "bind": -1,
+      "settings": {
+        "Дистанция отлета": 6.0,
+        "Авто-Фейерверк": true
+      }
+    },
+    "EntityESP": {
+      "toggled": true,
+      "bind": -1,
+      "settings": {
+        "Отображать": {
+          "Игроки": true,
+          "Мобы": true,
+          "Животные": true,
+          "Предметы": true
+        },
+        "Элементы": {
+          "Теги": true,
+          "Броня": true
+        },
+        "Боксы": true,
+        "Заполнить бокс": true,
+        "Мод заливки": "Обычный",
+        "Скорость волн": 1.2,
+        "Размер волн": 1.0,
+        "Скорость линий": 1.4,
+        "Прыжки линий": 0.55,
+        "Краснеть при ударе": true,
+        "Обводка": 1.1,
+        "Свечение": 1.0,
+        "Сила заливки": 0.6,
+        "Прозрачность": 1.0
+      }
+    },
+    "FireworkESP": {
+      "toggled": false,
+      "bind": -1,
+      "settings": {
+        "Интервал (мс)": 100.0,
+        "Время жизни (мс)": 1000.0
+      }
+    },
+    "FootTrail": {
+      "toggled": false,
+      "bind": -1,
+      "settings": {
+        "На себе": true,
+        "На игроках": true,
+        "Цвет": "Тема",
+        "Размер": 0.22,
+        "Количество": 3.0
+      }
+    },
+    "FastExp": {
+      "toggled": true,
+      "bind": -1,
+      "settings": {}
+    },
+    "Figura": {
+      "toggled": false,
+      "bind": -1,
+      "settings": {}
+    },
+    "Flight": {
+      "toggled": false,
+      "bind": -1,
+      "settings": {
+        "Speed": 2.0
+      }
+    },
+    "FreeCam": {
+      "toggled": false,
+      "bind": -1,
+      "settings": {}
+    },
+    "FullBright": {
+      "toggled": true,
+      "bind": -1,
+      "settings": {}
+    },
+    "GrimGlide": {
+      "toggled": false,
+      "bind": -1,
+      "settings": {}
+    },
+    "NoFall": {
+      "toggled": false,
+      "bind": -1,
+      "settings": {}
+    },
+    "HighJump": {
+      "toggled": false,
+      "bind": -1,
+      "settings": {
+        "Режим": "Shulker",
+        "Множитель": 1.7
+      }
+    },
+    "HelpMessage": {
+      "toggled": true,
+      "bind": -1,
+      "settings": {
+        "Бинд": -1
+      }
+    },
+    "HMI": {
+      "toggled": false,
+      "bind": -1,
+      "settings": {
+        "ViewModel": true
+      }
+    },
+    "HitBubbles": {
+      "toggled": false,
+      "bind": -1,
+      "settings": {}
+    },
+    "HitMarker": {
+      "toggled": true,
+      "bind": -1,
+      "settings": {
+        "Размер": 0.5,
+        "Время появления": 100.0,
+        "Время показа": 300.0,
+        "Время исчезновения": 200.0,
+        "Свечение": true,
+        "Анимация масштаба": true
+      }
+    },
+    "Interface": {
+      "toggled": true,
+      "bind": -1,
+      "settings": {
+        "Прозрачность HUD": 100.0,
+        "Glow обводка HUD": false,
+        "Элементы": {
+          "Ватермарка": true,
+          "Горячие клавиши": true,
+          "Серверные бинды": true,
+          "Зелья": true,
+          "Таргет худ": true,
+          "Уведомления": true,
+          "Стафф": true,
+          "Информация": true
+        }
+      }
+    },
+    "Cinematic Camera": {
+      "toggled": true,
+      "bind": -1,
+      "settings": {}
+    },
+    "InventoryWalk": {
+      "toggled": false,
+      "bind": -1,
+      "settings": {
+        "Обход": "Обычный",
+        "Версия свапа": "1.21.4"
+      }
+    },
+    "ItemAim": {
+      "toggled": false,
+      "bind": -1,
+      "settings": {
+        "Лутать": {
+          "Шары": true,
+          "Элитры": true
+        }
+      }
+    },
+    "ItemRelease": {
+      "toggled": false,
+      "bind": -1,
+      "settings": {
+        "Предметы": {
+          "Лук": true,
+          "Трезубец": false,
+          "Арбалет": true
+        },
+        "Задержка выстрела": 2.5
+      }
+    },
+    "ItemScroller": {
+      "toggled": true,
+      "bind": -1,
+      "settings": {
+        "Задержка": 50.0
+      }
+    },
+    "ItemReplacer": {
+      "toggled": false,
+      "bind": -1,
+      "settings": {
+        "Model": "Katana"
+      }
+    },
+    "JumpCircle": {
+      "toggled": false,
+      "bind": -1,
+      "settings": {
+        "Радиус": 1.85,
+        "Скорость": 1.2,
+        "Скорость исчезновения": 1.5
+      }
+    },
+    "KillEffect": {
+      "toggled": true,
+      "bind": -1,
+      "settings": {
+        "Режим": "Лего",
+        "Длительность лего": 2.4,
+        "Размер кубика": 0.09,
+        "Кубиков на часть": 8.0,
+        "Звук лего": true,
+        "Громкость звука": 70.0
+      }
+    },
+    "KTLeave": {
+      "toggled": false,
+      "bind": -1,
+      "settings": {
+        "Кнопка лива": 71
+      }
+    },
+    "LeaveTracker": {
+      "toggled": true,
+      "bind": -1,
+      "settings": {}
+    },
+    "LineGlyphes": {
+      "toggled": true,
+      "bind": -1,
+      "settings": {
+        "Количество Линий": 70.0,
+        "Медленная Скорость": false,
+        "Пунктирные Линии": false,
+        "Шаг Пунктира": 3.0,
+        "Свечение": false
+      }
+    },
+    "LayerCooldown": {
+      "toggled": true,
+      "bind": -1,
+      "settings": {}
+    },
+    "LockSlot": {
+      "toggled": false,
+      "bind": -1,
+      "settings": {
+        "Слоты": {
+          "1": false,
+          "2": false,
+          "3": false,
+          "4": false,
+          "5": false,
+          "6": false,
+          "7": false,
+          "8": false,
+          "9": false
+        }
+      }
+    },
+    "LootTracker": {
+      "toggled": false,
+      "bind": -1,
+      "settings": {
+        "Спавнеры": true,
+        "Вагонетки": true,
+        "Макс. дистанция": 64.0
+      }
+    },
+    "NoClip": {
+      "toggled": false,
+      "bind": -1,
+      "settings": {}
+    },
+    "NoJumpDelay": {
+      "toggled": false,
+      "bind": -1,
+      "settings": {}
+    },
+    "NoPush": {
+      "toggled": true,
+      "bind": -1,
+      "settings": {
+        "Коллизия": {
+          "Блоки": true,
+          "Вода": false,
+          "Удочик": true,
+          "Игроки": true
+        }
+      }
+    },
+    "NoSlow": {
+      "toggled": false,
+      "bind": -1,
+      "settings": {
+        "Мод": "Grim Old",
+        "Спринт": true
+      }
+    },
+    "NoVelocity": {
+      "toggled": false,
+      "bind": -1,
+      "settings": {
+        "Мод": "Jump Reset",
+        "Взрывы": true
+      }
+    },
+    "NoVignette": {
+      "toggled": true,
+      "bind": -1,
+      "settings": {}
+    },
+    "NoControllerWeb": {
+      "toggled": false,
+      "bind": -1,
+      "settings": {}
+    },
+    "NoWeb": {
+      "toggled": false,
+      "bind": -1,
+      "settings": {
+        "Мод": "Коллизия"
+      }
+    },
+    "PacketCriticals": {
+      "toggled": false,
+      "bind": -1,
+      "settings": {}
+    },
+    "Particles": {
+      "toggled": false,
+      "bind": -1,
+      "settings": {
+        "Тип частиц": "Звездочки",
+        "Добавлять при": {
+          "Бездействии": false,
+          "Беге": false,
+          "Ударе": true,
+          "Падении перла": false,
+          "Падении трезубца": false,
+          "Сносе тотема": true
+        },
+        "Количество": 10.0,
+        "Свечение": true
+      }
+    },
+    "PlayerFakeLags": {
+      "toggled": false,
+      "bind": -1,
+      "settings": {
+        "Режим": "Blink",
+        "Задержка (MS)": 500.0,
+        "Только движение": true
+      }
+    },
+    "PolarFlyX": {
+      "toggled": false,
+      "bind": -1,
+      "settings": {}
+    },
+    "Projectile": {
+      "toggled": false,
+      "bind": -1,
+      "settings": {
+        "Размер": 1.2
+      }
+    },
+    "PotionTracker": {
+      "toggled": true,
+      "bind": -1,
+      "settings": {}
+    },
+    "PotionNotifier": {
+      "toggled": false,
+      "bind": -1,
+      "settings": {
+        "Сила": true,
+        "Скорость": true,
+        "Регенерация": true,
+        "Огнестойкость": true,
+        "Невидимость": true,
+        "Игнорировать друзей": true
+      }
+    },
+    "ScoreboardHP": {
+      "toggled": true,
+      "bind": -1,
+      "settings": {}
+    },
+    "Removals": {
+      "toggled": true,
+      "bind": -1,
+      "settings": {
+        "Элементы": {
+          "Огонь": true,
+          "Плохие эффекты": true,
+          "Оверлей в блоке": true,
+          "Частицы": true,
+          "Погода": true,
+          "Облака": true,
+          "Блок-сущности": true,
+          "Тени": true,
+          "Анимацию тотема": true
+        }
+      }
+    },
+    "RPSpoofer": {
+      "toggled": false,
+      "bind": -1,
+      "settings": {}
+    },
+    "Satellite": {
+      "toggled": false,
+      "bind": -1,
+      "settings": {
+        "Плечо": "Правое",
+        "Размер": 0.38,
+        "Смещение X": 0.0,
+        "Смещение Y": 0.18,
+        "Смещение Z": 0.0,
+        "Поворот X": 0.0,
+        "Поворот Y": 0.0,
+        "Поворот Z": 0.0,
+        "Показывать на себе": true,
+        "Показывать на других": true,
+        "Показывать на друзьях": true,
+        "Атаковать врагов": true,
+        "Idle-анимация": true,
+        "Скорость idle": 1.0,
+        "Сила idle": 0.35
+      }
+    },
+    "SeeInvisibles": {
+      "toggled": false,
+      "bind": -1,
+      "settings": {}
+    },
+    "ShaderESP": {
+      "toggled": false,
+      "bind": -1,
+      "settings": {
+        "Цели": {
+          "Игроки": true,
+          "Кристаллы": true,
+          "Предметы": false,
+          "Себя": false
+        },
+        "Заливка": false
+      }
+    },
+    "ShaderHands": {
+      "toggled": false,
+      "bind": -1,
+      "settings": {
+        "Режим": "Свечение",
+        "Скорость волн": 1.2,
+        "Частота волн": 1.0,
+        "Ширина обводки": 1.2,
+        "Сила свечения": 1.0,
+        "Заливка": 0.6,
+        "Прозрачность": 1.0
+      }
+    },
+    "ServerHelper": {
+      "toggled": false,
+      "bind": -1,
+      "settings": {
+        "Режим": "Lony",
+        "Перышко": -1,
+        "Ливалка": -1,
+        "Трапка": -1,
+        "Ливалка с платформой": -1,
+        "Дезориентация": -1,
+        "Пласт": -1,
+        "Явная пыль": -1,
+        "Снег заморозки": -1,
+        "Божья аура": -1
+      }
+    },
+    "ShulkerPreview": {
+      "toggled": false,
+      "bind": -1,
+      "settings": {}
+    },
+    "Sonar": {
+      "toggled": true,
+      "bind": -1,
+      "settings": {
+        "Длительность": 5.6,
+        "Яркость": 1.0,
+        "Ширина": 1.0,
+        "Резкость": 24.0
+      }
+    },
+    "Speed": {
+      "toggled": false,
+      "bind": -1,
+      "settings": {
+        "Скорость": 1.39,
+        "Радиус": 2.1000001,
+        "Предикт": 1.0,
+        "Только на элитре": false
+      }
+    },
+    "Spider": {
+      "toggled": false,
+      "bind": -1,
+      "settings": {
+        "Мод": "Вода",
+        "Легит": false
+      }
+    },
+    "Sprint": {
+      "toggled": true,
+      "bind": -1,
+      "settings": {
+        "Сохранять в воде": false
+      }
+    },
+    "Step": {
+      "toggled": false,
+      "bind": -1,
+      "settings": {
+        "Режим": "Vanilla",
+        "Высота": 1.0,
+        "Reverse": false,
+        "Высота Reverse": 1.0
+      }
+    },
+    "SwingAnimations": {
+      "toggled": true,
+      "bind": -1,
+      "settings": {
+        "Анимация свинга": true,
+        "Тип свинга": "Smooth",
+        "Сила анимации": 1.0,
+        "Угол DropDown": 12.0,
+        "Наклон DropDown": 12.0,
+        "Плавная анимация": false,
+        "Скорость анимации": 12.0,
+        "Только при Aura": false,
+        "Свап рук": false,
+        "Анимация еды": false
+      }
+    },
+    "TargetESP": {
+      "toggled": true,
+      "bind": -1,
+      "settings": {
+        "Режим": "Кристаллы",
+        "Размер": 1.15,
+        "Скорость вращения": 1.2,
+        "Окрашивание при ударе": true,
+        "Радиус кольца": 0.5,
+        "Скорость кольца": 1.0,
+        "Кол-во призраков": 3.0,
+        "Время жизни (мс)": 350.0,
+        "Цикл XZ": 2000.0,
+        "Цикл Y": 1700.0
+      }
+    },
+    "TargetPearl": {
+      "toggled": true,
+      "bind": -1,
+      "settings": {
+        "Тип": "Автоматический",
+        "Бинд": -1,
+        "Только за противником": false,
+        "Игнорировать друзей": true
+      }
+    },
+    "Timer": {
+      "toggled": false,
+      "bind": -1,
+      "settings": {
+        "Скорость": 2.0
+      }
+    },
+    "TotemPop": {
+      "toggled": true,
+      "bind": -1,
+      "settings": {
+        "Режим": "Angel",
+        "Визуал": true,
+        "Чат инфо": true,
+        "Уведомления": true,
+        "Высота": 4.0,
+        "Длительность": 3.0
+      }
+    },
+    "TpsSync": {
+      "toggled": false,
+      "bind": -1,
+      "settings": {}
+    },
+    "TpBack": {
+      "toggled": false,
+      "bind": -1,
+      "settings": {
+        "Задержка": 5.0
+      }
+    },
+    "TPLoot": {
+      "toggled": false,
+      "bind": -1,
+      "settings": {
+        "Дистанция": 10.0,
+        "Задержка лута": 500.0,
+        "После лута": "Возвращаться",
+        "Задержка действия": 1000.0
+      }
+    },
+    "Trails": {
+      "toggled": false,
+      "bind": -1,
+      "settings": {
+        "Длительность": 300.0
+      }
+    },
+    "Trajectories": {
+      "toggled": false,
+      "bind": -1,
+      "settings": {
+        "Ширина линии": 2.2
+      }
+    },
+    "TriggerBot": {
+      "toggled": true,
+      "bind": -1,
+      "settings": {
+        "Дистанция атаки": 3.0,
+        "Опции": {
+          "Умные криты": true,
+          "Сброс спринта": true,
+          "Бить через стены": false,
+          "Проверка на наведение": true,
+          "Отжимать щит": false,
+          "Ломать щит": true
+        },
+        "Таргеты": {
+          "Игроки": true,
+          "Невидимки": true,
+          "Мирные": false,
+          "Мобы": true
+        }
+      }
+    },
+    "ViewModel": {
+      "toggled": true,
+      "bind": -1,
+      "settings": {
+        "Правая рука X": 0.0,
+        "Правая рука Y": 0.0,
+        "Правая рука Z": 0.0,
+        "Левая рука X": 0.0,
+        "Левая рука Y": 0.0,
+        "Левая рука Z": 0.0,
+        "Только с аурой": false
+      }
+    },
+    "CustomWorld": {
+      "toggled": true,
+      "bind": -1,
+      "settings": {
+        "Настройки мира": {
+          "Время": true,
+          "Фог": true
+        },
+        "Время": 12.0,
+        "Дистанция фога": 100.0
+      }
+    },
+    "XCarry": {
+      "toggled": false,
+      "bind": -1,
+      "settings": {
+        "Авто выкл": true
+      }
+    }
+  }
+}
