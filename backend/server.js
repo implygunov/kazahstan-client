@@ -16,6 +16,7 @@ app.use(express.json({ limit: '50mb' }));
 // Перед каждым запросом к API перечитываем данные из MySQL,
 // чтобы правки из phpMyAdmin сразу отражались на сайте, а память была свежей.
 app.use('/api', async (req, res, next) => {
+  if (req.method !== 'GET') return next();
   try {
     await db.reload();
     next();

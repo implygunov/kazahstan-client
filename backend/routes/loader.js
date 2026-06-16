@@ -36,50 +36,50 @@ router.get('/admin/loader', authMiddleware, adminOnly, (req, res) => {
 });
 
 // Admin — включить/выключить техработы + изменить сообщение
-router.post('/admin/loader/maintenance', authMiddleware, adminOnly, (req, res) => {
+router.post('/admin/loader/maintenance', authMiddleware, adminOnly, async (req, res) => {
   const { enabled, message } = req.body;
   const cfg = getCfg();
   if (enabled !== undefined) cfg.maintenance = !!enabled;
   if (message !== undefined) cfg.maintenance_message = String(message);
-  save();
+  await save();
   logAction('loader_maintenance', `enabled:${cfg.maintenance}`, cfg.maintenance_message, req.user);
   res.json({ ok: true, maintenance: cfg.maintenance });
 });
 
 // Admin — включить/выключить авторизацию
-router.post('/admin/loader/auth', authMiddleware, adminOnly, (req, res) => {
+router.post('/admin/loader/auth', authMiddleware, adminOnly, async (req, res) => {
   const { disabled } = req.body;
   const cfg = getCfg();
   cfg.auth_disabled = !!disabled;
-  save();
+  await save();
   logAction('loader_auth_toggle', `disabled:${cfg.auth_disabled}`, '', req.user);
   res.json({ ok: true, auth_disabled: cfg.auth_disabled });
 });
 
 // Admin — установить активную версию
-router.post('/admin/loader/version', authMiddleware, adminOnly, (req, res) => {
+router.post('/admin/loader/version', authMiddleware, adminOnly, async (req, res) => {
   const { version } = req.body;
   if (!AVAILABLE_VERSIONS.includes(version)) return res.status(400).json({ error: 'invalid_version' });
   const cfg = getCfg();
   cfg.current_version = version;
-  save();
+  await save();
   logAction('loader_version_set', `version:${version}`, '', req.user);
   res.json({ ok: true, version: cfg.current_version });
 });
 
 // Admin — "уведомить всех об обновлении" (меняет current_version, лоадеры получат при следующем status-запросе)
-router.post('/admin/loader/notify', authMiddleware, adminOnly, (req, res) => {
+router.post('/admin/loader/notify', authMiddleware, adminOnly, async (req, res) => {
   const { version } = req.body;
   if (!AVAILABLE_VERSIONS.includes(version)) return res.status(400).json({ error: 'invalid_version' });
   const cfg = getCfg();
   cfg.current_version = version;
-  save();
+  await save();
   logAction('loader_notify', `version:${version}`, 'broadcast via status poll', req.user);
   res.json({ ok: true, version });
 });
 
 // Admin — выдать доступ пользователю к версиям
-router.post('/admin/loader/access', authMiddleware, adminOnly, (req, res) => {
+router.post('/admin/loader/access', authMiddleware, adminOnly, async (req, res) => {
   const { uid, username, versions, action } = req.body;
   if (!uid) return res.status(400).json({ error: 'uid_required' });
   const cfg = getCfg();
@@ -95,7 +95,7 @@ router.post('/admin/loader/access', authMiddleware, adminOnly, (req, res) => {
       cfg.user_access.push({ uid: String(uid), username: username || String(uid), versions: versions || [] });
     }
   }
-  save();
+  await save();
   logAction('loader_access', `uid:${uid}`, `action:${action} versions:${(versions || []).join(',')}`, req.user);
   res.json({ ok: true, user_access: cfg.user_access });
 });

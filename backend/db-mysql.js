@@ -134,9 +134,8 @@ let saving = false;
 let dirty = false;
 
 function save() {
-  // Синхронный контракт: помечаем «грязно» и запускаем фоновую запись.
   dirty = true;
-  flush();
+  return flush(); // возвращаем промис — роуты могут await save()
 }
 
 async function flush() {
