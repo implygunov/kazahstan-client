@@ -134,6 +134,54 @@ router.post('/launcher/login', (req, res) => {
   });
 });
 
+// ── Profile endpoint for C++ native launcher (RestoreSession) ──
+// GET /api/endpoints/profile.php   Bearer: JWT
+// Returns { success: true, user: { id, username, email, hwid, subscription_type, ... } }
+router.get('/endpoints/profile.php', authMiddleware, (req, res) => {
+  const user = data.users.find(u => u.id === req.user.id);
+  if (!user) return res.status(404).json({ success: false, error: 'user_not_found' });
+
+  const PRIVILEGED_ROLES = ['ADMIN', 'DEVELOPER', 'YOUTUBE', 'MODERATOR'];
+  const now = new Date();
+  let subscription_type = 'none';
+  let subscription_expires = '';
+
+  if (PRIVILEGED_ROLES.includes(user.role)) {
+    subscription_type = 'lifetime';
+  } else if (user.subscription_until && new Date(user.subscription_until) > now) {
+    subscription_type = 'premium';
+    subscription_expires = new Date(user.subscription_until).toISOString().replace('T', ' ').slice(0, 19);
+  }
+
+  res.json({
+    success: true,
+    user: {
+      id: user.id,
+      username: user.username,
+      email: user.email || '',
+      hwid: user.rml_hwid || user.hwid || '',
+      avatar: user.avatar || '',
+      banner: user.banner || '',
+      subscription_type,
+      subscription_expires,
+      role: (user.role || 'user').toLowerCase(),
+      status: user.role === 'BANNED' ? 'banned' : 'active',
+    },
+  });
+});
+
+// ── Set HWID for native launcher ──
+// POST /api/endpoints/set_hwid.php  Bearer: JWT  Body: { hwid }
+router.post('/endpoints/set_hwid.php', authMiddleware, async (req, res) => {
+  const { hwid } = req.body;
+  if (!hwid) return res.status(400).json({ success: false, error: 'hwid_required' });
+  const user = data.users.find(u => u.id === req.user.id);
+  if (!user) return res.status(404).json({ success: false, error: 'user_not_found' });
+  user.rml_hwid = hwid;
+  await save();
+  res.json({ success: true });
+});
+
 // ── Выдача ключа расшифровки классов (Pillar B) ──
 // Ключ K, которым при сборке зашифрованы .class секретных пакетов клиента.
 // Отдаётся ТОЛЬКО авторизованному лаунчеру (Bearer JWT). Лаунчер передаёт его
