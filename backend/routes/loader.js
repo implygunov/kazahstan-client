@@ -5,6 +5,7 @@ const { authMiddleware, adminOnly, logAction } = require('../middleware');
 const router = Router();
 
 const AVAILABLE_VERSIONS = ['1.21.4', '1.21.8', '1.21.11'];
+const PRIVILEGED_VERSION_ROLES = ['ADMIN', 'DEVELOPER', 'YOUTUBE', 'MODERATOR'];
 
 function getCfg() {
   if (!data.stats.loader) {
@@ -14,9 +15,27 @@ function getCfg() {
       current_version: '1.21.4',
       auth_disabled: false,
       user_access: [],
+      global_version_access: 'current',
+      maintenance_bypass_uids: [],
     };
   }
-  return data.stats.loader;
+  const cfg = data.stats.loader;
+  if (!cfg.global_version_access) cfg.global_version_access = 'current';
+  if (!cfg.maintenance_bypass_uids) cfg.maintenance_bypass_uids = [];
+  return cfg;
+}
+
+function getAllowedVersions(userId, userRole, cfg) {
+  const role = (userRole || '').toUpperCase();
+  if (PRIVILEGED_VERSION_ROLES.includes(role)) return AVAILABLE_VERSIONS;
+  const ga = cfg.global_version_access || 'current';
+  if (ga === 'all') return AVAILABLE_VERSIONS;
+  if (ga === 'none') return [];
+  const entry = (cfg.user_access || []).find(u => String(u.uid) === String(userId));
+  if (entry && entry.versions && entry.versions.length > 0) {
+    return entry.versions.filter(v => AVAILABLE_VERSIONS.includes(v));
+  }
+  return cfg.current_version ? [cfg.current_version] : [];
 }
 
 // Public — лоадер запрашивает при старте
@@ -103,6 +122,45 @@ router.post('/admin/loader/access', authMiddleware, adminOnly, async (req, res) 
 // Admin — список доступов пользователей
 router.get('/admin/loader/access', authMiddleware, adminOnly, (req, res) => {
   res.json({ user_access: getCfg().user_access || [] });
+});
+
+// Public (auth) — какие версии доступны данному пользователю
+router.get('/loader/versions', authMiddleware, (req, res) => {
+  const cfg = getCfg();
+  const allowed = getAllowedVersions(req.user.id, req.user.role, cfg);
+  res.json({
+    allowed_versions: allowed,
+    current_version: cfg.current_version,
+    global_access: cfg.global_version_access || 'current',
+  });
+});
+
+// Admin — установить глобальный режим доступа к версиям
+router.post('/admin/loader/global_access', authMiddleware, adminOnly, async (req, res) => {
+  const { access } = req.body;
+  if (!['all', 'current', 'none'].includes(access)) {
+    return res.status(400).json({ error: 'invalid_access_mode' });
+  }
+  const cfg = getCfg();
+  cfg.global_version_access = access;
+  await save();
+  logAction('loader_global_access', `access:${access}`, '', req.user);
+  res.json({ ok: true, global_version_access: access });
+});
+
+// Admin — добавить/убрать пользователя из обхода техработ
+router.post('/admin/loader/maintenance_bypass', authMiddleware, adminOnly, async (req, res) => {
+  const { uid, action } = req.body;
+  if (!uid) return res.status(400).json({ error: 'uid_required' });
+  const cfg = getCfg();
+  const idx = cfg.maintenance_bypass_uids.indexOf(String(uid));
+  if (action === 'revoke') {
+    if (idx !== -1) cfg.maintenance_bypass_uids.splice(idx, 1);
+  } else {
+    if (idx === -1) cfg.maintenance_bypass_uids.push(String(uid));
+  }
+  await save();
+  res.json({ ok: true, maintenance_bypass_uids: cfg.maintenance_bypass_uids });
 });
 
 module.exports = router;

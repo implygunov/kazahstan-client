@@ -132,6 +132,12 @@
           '<button class="la-btn la-bp" id="laSetVer">Установить как активную</button>' +
           '<button class="la-btn la-bw" id="laNotify">Уведомить всех об обновлении</button>' +
         '</div>' +
+        '<div class="la-info" id="laGlobalInfo" style="margin-top:14px;">&#8505; Загрузка...</div>' +
+        '<div class="la-br" style="margin-top:10px;">' +
+          '<button class="la-btn la-bp" id="laAccAll">&#10003; Все версии всем</button>' +
+          '<button class="la-btn la-bw" id="laAccCurrent">&#9654; Только активная версия</button>' +
+          '<button class="la-btn la-bd" id="laAccNone">&#10007; Закрыть все версии</button>' +
+        '</div>' +
         '<div class="la-info">&#8505; Лоадеры получат версию при следующем запросе /loader/status — ручная рассылка не нужна.</div>' +
       '</div>' +
       // Access
@@ -168,6 +174,12 @@
     if (msg) msg.value = cfg.maintenance_message || '';
     selVer = cfg.current_version || VERSIONS[0];
     renderPills();
+    var gi = document.getElementById('laGlobalInfo');
+    if (gi) {
+      var ga = cfg.global_version_access || 'current';
+      var labels = { all: '✓ Всем открыты все версии', current: '► Доступна только активная версия (' + (cfg.current_version || '?') + ')', none: '✗ Все версии закрыты (кроме Admin/Developer/Youtube)' };
+      gi.textContent = '🌐 Глобальный доступ сейчас: ' + (labels[ga] || ga);
+    }
   }
 
   function loadConfig() {
@@ -228,6 +240,15 @@
         .then(function (d) { if (d.error) { toast('Ошибка: ' + d.error, false); return; } toast('Все получат v' + selVer + ' при следующем запросе'); loadConfig(); })
         .catch(function (e) { if (e.message !== 'forbidden') toast('Ошибка', false); });
     };
+
+    ['laAccAll', 'laAccCurrent', 'laAccNone'].forEach(function (id, i) {
+      var modes = ['all', 'current', 'none'];
+      document.getElementById(id).onclick = function () {
+        api('/admin/loader/global_access', { method: 'POST', body: JSON.stringify({ access: modes[i] }) })
+          .then(function () { toast('Глобальный доступ обновлён'); loadConfig(); })
+          .catch(function (e) { if (e.message !== 'forbidden') toast('Ошибка', false); });
+      };
+    });
 
     document.getElementById('laGrant').onclick = function () {
       var uid = document.getElementById('laUid').value.trim();

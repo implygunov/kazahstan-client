@@ -105,6 +105,17 @@ router.post('/launcher/login', (req, res) => {
   if (!bcrypt.compareSync(password, user.password)) return res.json({ allowed: false, error: 'Wrong password' });
   if (user.role === 'BANNED') return res.json({ allowed: false, error: 'User is banned' });
 
+  // Проверка техработ: блокируем вход, кроме привилегированных ролей и bypass-списка
+  const MAINTENANCE_BYPASS_ROLES = ['ADMIN', 'DEVELOPER', 'YOUTUBE', 'MODERATOR'];
+  const loaderCfg = data.stats && data.stats.loader;
+  if (loaderCfg && loaderCfg.maintenance) {
+    const bypassUids = loaderCfg.maintenance_bypass_uids || [];
+    if (!MAINTENANCE_BYPASS_ROLES.includes(user.role) && !bypassUids.includes(String(user.id))) {
+      const msg = loaderCfg.maintenance_message || 'Технические работы. Скоро вернёмся!';
+      return res.json({ allowed: false, error: msg });
+    }
+  }
+
   // RML HWID: отдельная привязка железа для лоадера (не пересекается с игровым hwid).
   if (hwid) {
     if (!user.rml_hwid) { user.rml_hwid = hwid; save(); }
