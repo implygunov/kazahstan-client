@@ -106,6 +106,13 @@ CREATE TABLE IF NOT EXISTS journal (
   PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+-- ---------- settings (key-value: конфиг лоадера и пр.) ----------
+CREATE TABLE IF NOT EXISTS settings (
+  `key`   VARCHAR(64) NOT NULL,
+  `value` JSON        NULL,
+  PRIMARY KEY (`key`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 SET FOREIGN_KEY_CHECKS = 1;
 
 -- ============================================================

@@ -34,6 +34,11 @@ const TABLES = [
 
 const JSON_COLS = new Set(['attachments']); // поля, хранящиеся как JSON
 
+// Ключи внутри data.stats, которые персистятся в таблицу `settings` как JSON.
+// Сюда попадает конфиг лоадера (техработы, версия, доступы), чтобы он
+// переживал перезапуск/сон free-дино Render, а не сбрасывался в дефолт.
+const SETTINGS_KEYS = ['loader'];
+
 function colName(c) {
   return c === 'keys' ? '`keys`' : '`' + c + '`';
 }
@@ -55,6 +60,16 @@ async function init() {
   const conn = await pool.getConnection();
   conn.release();
 
+  // Таблица настроек (key-value JSON). Создаём здесь, чтобы существующие БД
+  // не требовали ручной миграции/ре-импорта schema.sql.
+  await pool.query(
+    'CREATE TABLE IF NOT EXISTS settings (' +
+    '`key` VARCHAR(64) NOT NULL, ' +
+    '`value` JSON NULL, ' +
+    'PRIMARY KEY (`key`)' +
+    ') ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci'
+  );
+
   await loadAll();
   recomputeSequences();
   data.stats.users = data.users.length;
@@ -65,6 +80,19 @@ async function loadAll() {
   for (const t of TABLES) {
     const [rows] = await pool.query(`SELECT * FROM ${t.table}`);
     data[t.key] = rows.map(normalizeRow);
+  }
+  await loadSettings();
+}
+
+// Подтягиваем key-value настройки из таблицы `settings` в data.stats.
+async function loadSettings() {
+  const [rows] = await pool.query('SELECT `key`, `value` FROM settings');
+  for (const row of rows) {
+    let v = row.value;
+    if (typeof v === 'string') {
+      try { v = JSON.parse(v); } catch (_) { /* оставляем как есть */ }
+    }
+    data.stats[row.key] = v;
   }
 }
 
@@ -156,6 +184,16 @@ async function syncToDb() {
     } else {
       await pool.query(`DELETE FROM ${t.table}`);
     }
+  }
+
+  // Персист key-value настроек (конфиг лоадера и т.п.) из data.stats.
+  for (const key of SETTINGS_KEYS) {
+    const val = data.stats[key];
+    if (val === undefined) continue;
+    await pool.query(
+      'INSERT INTO settings (`key`, `value`) VALUES (?, ?) ON DUPLICATE KEY UPDATE `value`=VALUES(`value`)',
+      [key, JSON.stringify(val)]
+    );
   }
 }
 
