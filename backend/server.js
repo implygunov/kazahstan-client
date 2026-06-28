@@ -49,8 +49,8 @@ app.get('/launcher_storage/release/manifest.json', (req, res) => {
     files_zip_url: process.env.FILES_ZIP_URL || '',
     client_version: process.env.CLIENT_VERSION || '1.0.0',
     client_jar_url: process.env.CLIENT_JAR_URL || '',
-    host_relative_path: process.env.HOST_RELATIVE_PATH || 'builds/KazahstanDLC/game/versions/Fabric 1.21.4/1.21.4.exe',
-    jar_relative_path: process.env.JAR_RELATIVE_PATH || 'builds/KazahstanDLC/game/mods/KazahstanDLC-1.0.0-obfuscated.jar',
+    host_relative_path: process.env.HOST_RELATIVE_PATH || 'builds/Aura/game/versions/Fabric 1.21.4/1.21.4.exe',
+    jar_relative_path: process.env.JAR_RELATIVE_PATH || 'builds/Aura/game/mods/Aura-1.0.0-obfuscated.jar',
   });
 });
 
