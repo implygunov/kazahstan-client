@@ -85,17 +85,35 @@ a{color:inherit;text-decoration:none}
 .section-h{text-align:center;margin-bottom:56px}
 .section-h h2{font-size:32px;font-weight:800;letter-spacing:-.03em}
 .section-h p{color:var(--dim);font-size:14px;margin-top:8px}
-
-/* ── Features ──────────────────────────────────────────── */
-.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;max-width:880px;margin:0 auto}
-.feat{background:var(--card);border:1px solid var(--border);border-radius:var(--rad-lg);
-  padding:32px 24px;transition:var(--trans)}
-.feat:hover{background:var(--card-hover);border-color:rgba(255,255,255,.08)}
-.feat-icon{width:36px;height:36px;border-radius:10px;background:var(--accent-bg);
-  border:1px solid var(--border);display:flex;align-items:center;justify-content:center;
-  color:rgba(255,255,255,.3);margin-bottom:14px}
-.feat h3{font-size:15px;font-weight:600;margin-bottom:4px}
-.feat p{font-size:12px;color:var(--dim);line-height:1.5}
+/* △─ Features ──────────────────────────────────────────── */
+.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:920px;margin:0 auto}
+.feat{position:relative;background:var(--card);border:1px solid var(--border);border-radius:var(--rad-lg);
+  padding:36px 24px 32px;transition:all .35s cubic-bezier(.4,0,.2,1);overflow:hidden}
+.feat::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.12),transparent);
+  opacity:0;transition:opacity .5s ease}
+.feat:hover::before{opacity:1}
+.feat::after{content:'';position:absolute;top:-60%;left:-60%;width:220%;height:220%;
+  background:radial-gradient(circle at 30% 40%,rgba(255,255,255,.008) 0%,transparent 60%);
+  opacity:0;transition:opacity .6s ease;pointer-events:none}
+.feat:hover::after{opacity:1}
+.feat:hover{transform:translateY(-3px);border-color:rgba(255,255,255,.1);background:var(--card-hover)}
+.feat .feat-icon{width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,rgba(255,255,255,.06),rgba(255,255,255,.02));
+  border:1px solid rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;
+  margin-bottom:16px;transition:all .35s ease}
+.feat:hover .feat-icon{background:linear-gradient(135deg,rgba(255,255,255,.1),rgba(255,255,255,.04));
+  border-color:rgba(255,255,255,.12);transform:scale(1.05)}
+.feat h3{font-size:13px;font-weight:600;margin-bottom:6px;letter-spacing:.01em}
+.feat p{font-size:10.5px;color:var(--dim);line-height:1.6;font-weight:400}
+.feat:nth-child(1) .feat-icon svg{stroke:rgba(255,255,255,.7)}
+.feat:nth-child(2) .feat-icon svg{stroke:rgba(255,255,255,.8)}
+.feat:nth-child(3) .feat-icon svg{stroke:rgba(200,220,255,.9)}
+.feat:nth-child(4) .feat-icon svg{stroke:rgba(255,255,255,.75)}
+.feat:nth-child(5) .feat-icon svg{stroke:rgba(255,255,255,.85)}
+.feat:nth-child(6) .feat-icon svg{stroke:rgba(200,230,255,.9)}
+.feat-num{position:absolute;top:12px;right:16px;font-size:28px;font-weight:800;color:rgba(255,255,255,.03);
+  line-height:1;transition:all .35s ease;pointer-events:none;font-family:'Inter',sans-serif;letter-spacing:-.04em}
+.feat:hover .feat-num{color:rgba(255,255,255,.06);transform:scale(1.1)}
 
 /* ── Showcase ──────────────────────────────────────────── */
 .showcase-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:800px;margin:0 auto}
@@ -307,40 +325,45 @@ select.inp:focus,input.inp:focus{border-color:rgba(255,255,255,.15)}
   <div class="section-h">
     <h2>Built Different</h2>
     <p>Everything you need, nothing you don't.</p>
-  </div>
-  <div class="features-grid">
-    <div class="feat">
-      <div class="feat-icon"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
-      <h3>Advanced Protection</h3>
-      <p>HWID lock, debugger detection, VM detection, integrity checks. Your account stays yours.</p>
-    </div>
-    <div class="feat">
-      <div class="feat-icon"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
-      <h3>Premium Modules</h3>
-      <p>Combat, render, movement, misc — a curated set of modules for every playstyle.</p>
-    </div>
-    <div class="feat">
-      <div class="feat-icon"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-      <h3>Undetectable</h3>
-      <p>Obfuscated bytecode, encrypted classes, runtime checks. Designed to stay under the radar.</p>
-    </div>
-    <div class="feat">
-      <div class="feat-icon"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
-      <h3>Lightning Launcher</h3>
-      <p>C++ native launcher with WebView2, async downloads, and SHA-256 integrity checks.</p>
-    </div>
-    <div class="feat">
-      <div class="feat-icon"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 18V6"/></svg></div>
-      <h3>License System</h3>
-      <p>Key-based activation with tiers, HWID binding, and subscription management.</p>
-    </div>
-    <div class="feat">
-      <div class="feat-icon"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22 6 12 13 2 6"/></svg></div>
-      <h3>Active Development</h3>
-      <p>Regular updates, active community, and developer-driven feature roadmap.</p>
-    </div>
-  </div>
-</section>
+	</div>
+	<div class="features-grid">
+		<div class="feat">
+			<div class="feat-num">01</div>
+			<div class="feat-icon"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+			<h3>Advanced Protection</h3>
+			<p>HWID lock, debugger detection, VM detection, integrity checks. Your account stays yours.</p>
+		</div>
+		<div class="feat">
+			<div class="feat-num">02</div>
+			<div class="feat-icon"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+			<h3>Premium Modules</h3>
+			<p>Combat, render, movement, misc — a curated set of modules for every playstyle.</p>
+		</div>
+		<div class="feat">
+			<div class="feat-num">03</div>
+			<div class="feat-icon"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+			<h3>Undetectable</h3>
+			<p>Obfuscated bytecode, encrypted classes, runtime checks. Designed to stay under the radar.</p>
+		</div>
+		<div class="feat">
+			<div class="feat-num">04</div>
+			<div class="feat-icon"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+			<h3>Lightning Launcher</h3>
+			<p>C++ native launcher with WebView2, async downloads, and SHA-256 integrity checks.</p>
+		</div>
+		<div class="feat">
+			<div class="feat-num">05</div>
+			<div class="feat-icon"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 18V6"/></svg></div>
+			<h3>License System</h3>
+			<p>Key-based activation with tiers, HWID binding, and subscription management.</p>
+		</div>
+		<div class="feat">
+			<div class="feat-num">06</div>
+			<div class="feat-icon"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22 6 12 13 2 6"/></svg></div>
+			<h3>Active Development</h3>
+			<p>Regular updates, active community, and developer-driven feature roadmap.</p>
+		</div>
+	</div>
 
 <!-- ─── SHOWCASE ─────────────────────────────── -->
 <section class="section" id="showcase">
