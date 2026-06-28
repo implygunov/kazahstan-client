@@ -1,0 +1,667 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Kazahstan Client — Premium Game Enhancement</title>
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+/* ══════════════════════════════════════════════════════════
+   KAZAHSTAN CLIENT — Premium Black & White Landing
+   ══════════════════════════════════════════════════════════ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#000;--bg2:#050505;--bg3:#0a0a0a;--card:#0c0c0c;--card-hover:#111;
+  --border:rgba(255,255,255,.04);--border-l:rgba(255,255,255,.08);
+  --text:#fff;--dim:#666;--dim2:#333;--dim3:rgba(255,255,255,.12);
+  --accent:#fff;--accent-bg:rgba(255,255,255,.03);
+  --succ:#22c55e;--err:#ef4444;--warn:#f59e0b;
+  --rad:10px;--rad-lg:16px;--trans:.2s ease}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',-apple-system,sans-serif;-webkit-font-smoothing:antialiased;
+  background:var(--bg);color:var(--text);overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--dim2);border-radius:4px}
+
+/* ── Grid BG ───────────────────────────────────────────── */
+.grid-bg{position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:linear-gradient(rgba(255,255,255,.006) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.006) 1px,transparent 1px);
+  background-size:48px 48px}
+
+/* ── Particles ─────────────────────────────────────────── */
+#particles{position:fixed;inset:0;z-index:0;pointer-events:none}
+#particles canvas{width:100%;height:100%}
+
+/* ── Navbar ────────────────────────────────────────────── */
+.nav{position:fixed;top:0;left:0;right:0;height:64px;display:flex;align-items:center;
+  justify-content:space-between;padding:0 40px;z-index:100;
+  border-bottom:1px solid var(--border);background:rgba(0,0,0,.7);backdrop-filter:blur(12px)}
+.nav-l{display:flex;align-items:center;gap:10px}
+.nav-m{width:30px;height:30px;border-radius:9px;border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:rgba(255,255,255,.4)}
+.nav-brand{font-size:15px;font-weight:700;letter-spacing:-.02em}
+.nav-r{display:flex;align-items:center;gap:8px}
+.nav-btn{background:none;border:1px solid var(--border);border-radius:7px;padding:7px 16px;
+  font-size:12px;font-weight:500;color:var(--dim);cursor:pointer;transition:var(--trans);
+  font-family:'Inter',sans-serif}
+.nav-btn:hover{background:var(--accent-bg);color:var(--text)}
+.nav-btn.pr{background:rgba(255,255,255,.06);color:var(--text);border-color:transparent}
+.nav-btn.pr:hover{background:rgba(255,255,255,.1)}
+.nav-btn.g{color:var(--succ);border-color:rgba(34,197,94,.2)}
+.nav-btn.g:hover{background:rgba(34,197,94,.04)}
+.nav-btn.d{color:var(--err);border-color:rgba(239,68,68,.2)}
+.nav-btn.d:hover{background:rgba(239,68,68,.04)}
+
+/* ── Hero ──────────────────────────────────────────────── */
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;
+  padding:100px 40px 60px;z-index:2;text-align:center}
+.hero-inner{max-width:680px}
+.hero-badge{display:inline-flex;align-items:center;gap:5px;background:var(--accent-bg);
+  border:1px solid var(--border);border-radius:20px;padding:4px 14px;font-size:10px;
+  font-weight:500;color:var(--dim);letter-spacing:.04em;margin-bottom:24px}
+.hero-badge span{color:var(--text)}
+.hero h1{font-size:clamp(48px,7vw,80px);font-weight:800;letter-spacing:-.04em;line-height:1.05}
+.hero h1 .fade{color:rgba(255,255,255,.3)}
+.hero p{font-size:16px;color:var(--dim);line-height:1.6;margin:20px 0 36px;max-width:480px;margin-left:auto;margin-right:auto}
+.hero-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.hero-btn{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.07);
+  border:1px solid rgba(255,255,255,.06);border-radius:10px;padding:14px 28px;
+  font-size:14px;font-weight:600;color:var(--text);cursor:pointer;transition:var(--trans);
+  font-family:'Inter',sans-serif}
+.hero-btn:hover{background:rgba(255,255,255,.1);transform:translateY(-1px)}
+.hero-btn.ghost{background:none;border-color:var(--border);color:var(--dim)}
+.hero-btn.ghost:hover{color:var(--text);border-color:rgba(255,255,255,.1)}
+.hero-btn svg{width:16px;height:16px}
+.hero-status{margin-top:24px;display:flex;align-items:center;justify-content:center;gap:6px;
+  font-size:11px;color:var(--dim)}
+.hero-status .dot{width:5px;height:5px;border-radius:50%;background:var(--succ)}
+
+/* ── Sections ──────────────────────────────────────────── */
+.section{padding:100px 40px;position:relative;z-index:2}
+.section-h{text-align:center;margin-bottom:56px}
+.section-h h2{font-size:32px;font-weight:800;letter-spacing:-.03em}
+.section-h p{color:var(--dim);font-size:14px;margin-top:8px}
+
+/* ── Features ──────────────────────────────────────────── */
+.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;max-width:880px;margin:0 auto}
+.feat{background:var(--card);border:1px solid var(--border);border-radius:var(--rad-lg);
+  padding:32px 24px;transition:var(--trans)}
+.feat:hover{background:var(--card-hover);border-color:rgba(255,255,255,.08)}
+.feat-icon{width:36px;height:36px;border-radius:10px;background:var(--accent-bg);
+  border:1px solid var(--border);display:flex;align-items:center;justify-content:center;
+  color:rgba(255,255,255,.3);margin-bottom:14px}
+.feat h3{font-size:15px;font-weight:600;margin-bottom:4px}
+.feat p{font-size:12px;color:var(--dim);line-height:1.5}
+
+/* ── Showcase ──────────────────────────────────────────── */
+.showcase-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:800px;margin:0 auto}
+.showcase-item{background:var(--card);border:1px solid var(--border);border-radius:var(--rad-lg);
+  padding:28px 24px;position:relative;overflow:hidden}
+.showcase-item .num{position:absolute;top:12px;right:14px;font-size:48px;font-weight:900;
+  color:rgba(255,255,255,.02);line-height:1;pointer-events:none}
+.showcase-item h3{font-size:15px;font-weight:600;margin-bottom:6px}
+.showcase-item p{font-size:12px;color:var(--dim);line-height:1.5}
+
+/* ── Status Bar ────────────────────────────────────────── */
+.status-bar{position:fixed;bottom:0;left:0;right:0;z-index:100;
+  border-top:1px solid var(--border);background:rgba(0,0,0,.65);backdrop-filter:blur(8px);
+  display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:36px;font-size:10px}
+.status-bar .sb-l{display:flex;align-items:center;gap:12px;color:var(--dim)}
+.status-bar .sb-l .pt{color:rgba(255,255,255,.4);font-weight:500}
+.status-bar .sb-r{display:flex;align-items:center;gap:14px;color:var(--dim)}
+.status-bar .sb-r span{display:flex;align-items:center;gap:4px}
+.status-bar .sb-r .dt{width:5px;height:5px;border-radius:50%;background:var(--succ)}
+
+/* ── Modal / Auth ──────────────────────────────────────── */
+.modal-overlay{position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.7);
+  backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;
+  opacity:0;transition:opacity .2s}
+.modal-overlay.show{display:flex;opacity:1}
+.modal{background:var(--bg3);border:1px solid var(--border);border-radius:var(--rad-lg);
+  padding:36px 32px;width:380px;position:relative;transform:scale(.96);transition:transform .2s}
+.modal-overlay.show .modal{transform:scale(1)}
+.modal-close{position:absolute;top:12px;right:14px;background:none;border:none;color:var(--dim);
+  font-size:16px;cursor:pointer;width:28px;height:28px;border-radius:6px;display:flex;
+  align-items:center;justify-content:center;transition:var(--trans)}
+.modal-close:hover{background:var(--accent-bg);color:var(--text)}
+.modal h2{font-size:20px;font-weight:700;letter-spacing:-.02em;margin-bottom:4px}
+.modal-sub{font-size:12px;color:var(--dim);margin-bottom:24px}
+.field{margin-bottom:14px}
+.field label{display:block;font-size:9.5px;font-weight:500;color:var(--dim);
+  text-transform:uppercase;letter-spacing:.08em;margin-bottom:5px}
+.field input{width:100%;background:var(--accent-bg);border:1px solid var(--border);
+  border-radius:8px;padding:10px 14px;color:var(--text);font-size:13px;
+  outline:none;font-family:'Inter',sans-serif;transition:var(--trans)}
+.field input:focus{border-color:rgba(255,255,255,.15);background:rgba(255,255,255,.05)}
+.field input::placeholder{color:rgba(255,255,255,.1)}
+.btn{width:100%;background:rgba(255,255,255,.06);color:var(--text);border:none;
+  padding:11px 0;border-radius:8px;font-size:13px;font-weight:500;cursor:pointer;
+  transition:var(--trans);font-family:'Inter',sans-serif;margin-top:4px}
+.btn:hover{background:rgba(255,255,255,.1)}
+.btn:active{transform:scale(.99)}
+.btn:disabled{opacity:.3;cursor:not-allowed;transform:none}
+.btn .sp{display:none;width:14px;height:14px;border:1.5px solid rgba(255,255,255,.1);
+  border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;margin:0 auto}
+@keyframes spin{to{transform:rotate(360deg)}}
+.btn.loading .sp{display:inline-block}
+.btn.loading .bt{display:none}
+.auth-msg{height:18px;font-size:11px;text-align:center;margin-top:12px;font-weight:400}
+.auth-msg.err{color:var(--err)}
+.auth-msg.ok{color:var(--succ)}
+.modal-tabs{display:flex;gap:2px;margin-bottom:20px;background:var(--accent-bg);
+  border-radius:8px;padding:3px}
+.modal-tab{flex:1;text-align:center;padding:8px 0;font-size:12px;font-weight:500;
+  color:var(--dim);cursor:pointer;border-radius:6px;transition:var(--trans)}
+.modal-tab.active{background:rgba(255,255,255,.06);color:var(--text)}
+
+/* ── Dashboard (after login) ───────────────────────────── */
+.dash-wrap{display:flex;min-height:100vh;padding-top:64px;padding-bottom:36px;z-index:2;position:relative}
+.dash-sb{width:220px;flex-shrink:0;border-right:1px solid var(--border);padding:16px 10px;position:sticky;top:64px;height:calc(100vh - 100px);overflow-y:auto}
+.dash-sb-label{font-size:8.5px;font-weight:600;color:var(--dim);text-transform:uppercase;
+  letter-spacing:.12em;padding:14px 10px 6px}
+.dash-sb-item{display:flex;align-items:center;gap:9px;padding:8px 10px;border-radius:7px;
+  cursor:pointer;font-size:12px;font-weight:500;color:var(--dim);transition:var(--trans)}
+.dash-sb-item:hover{color:var(--text);background:var(--accent-bg)}
+.dash-sb-item.active{color:var(--text);background:var(--accent-bg)}
+.dash-main{flex:1;padding:24px 32px;min-width:0}
+.dash-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px}
+.dash-hdr h2{font-size:22px;font-weight:700;letter-spacing:-.02em}
+.dash-hdr p{font-size:12px;color:var(--dim)}
+.dash-card{background:var(--card);border:1px solid var(--border);border-radius:var(--rad-lg);
+  padding:20px 24px;margin-bottom:12px}
+.dash-card-t{font-size:11px;font-weight:600;color:var(--dim);text-transform:uppercase;
+  letter-spacing:.06em;margin-bottom:14px}
+.stat-row{display:flex;gap:10px;margin-bottom:20px}
+.stat-c{background:var(--bg3);border:1px solid var(--border);border-radius:var(--rad);padding:14px 18px;flex:1}
+.stat-c .v{font-size:22px;font-weight:600}
+.stat-c .l{font-size:10.5px;color:var(--dim);margin-top:2px}
+.row{display:flex;align-items:center;justify-content:space-between;padding:8px 0}
+.row+.row{border-top:1px solid var(--border)}
+.rl{font-size:12px;font-weight:500}
+.badge{font-size:9px;font-weight:600;padding:2px 8px;border-radius:10px;
+  border:1px solid var(--border);color:var(--dim)}
+.badge.s{color:var(--succ);border-color:rgba(34,197,94,.2);background:rgba(34,197,94,.04)}
+.badge.e{color:var(--err);border-color:rgba(239,68,68,.2);background:rgba(239,68,68,.04)}
+.badge.w{color:var(--warn);border-color:rgba(245,158,11,.2);background:rgba(245,158,11,.04)}
+
+/* ── Tables ────────────────────────────────────────────── */
+table{width:100%;border-collapse:collapse;font-size:12px}
+th{padding:7px 10px;text-align:left;font-weight:600;color:var(--dim);font-size:9.5px;
+  text-transform:uppercase;letter-spacing:.06em;border-bottom:1px solid var(--border)}
+td{padding:7px 10px;border-bottom:1px solid rgba(255,255,255,.02);color:rgba(255,255,255,.7)}
+tr:hover td{background:var(--accent-bg)}
+.btn-s{background:none;border:1px solid var(--border);border-radius:5px;padding:4px 10px;
+  font-size:10px;color:var(--dim);cursor:pointer;transition:var(--trans);font-family:'Inter',sans-serif}
+.btn-s:hover{background:var(--accent-bg);color:var(--text)}
+.btn-s.d{color:var(--err);border-color:rgba(239,68,68,.2)}
+.btn-s.d:hover{background:rgba(239,68,68,.06)}
+.btn-s.g{color:var(--succ);border-color:rgba(34,197,94,.2)}
+.btn-s.g:hover{background:rgba(34,197,94,.04)}
+select.inp,input.inp{background:var(--accent-bg);border:1px solid var(--border);
+  border-radius:6px;padding:5px 10px;color:var(--text);font-size:11px;outline:none;
+  font-family:'Inter',sans-serif}
+select.inp:focus,input.inp:focus{border-color:rgba(255,255,255,.15)}
+
+/* ── Toast ─────────────────────────────────────────────── */
+.toast{position:fixed;bottom:48px;left:50%;transform:translateX(-50%) translateY(8px);
+  padding:10px 20px;border-radius:8px;font-size:12px;font-weight:500;z-index:9999;
+  opacity:0;transition:all .3s;pointer-events:none;white-space:nowrap}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.toast.ok{background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.2);color:var(--succ)}
+.toast.err{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.2);color:var(--err)}
+
+/* ── Responsive ────────────────────────────────────────── */
+@media(max-width:768px){
+  .nav{padding:0 20px}
+  .nav-r .nav-btn{font-size:10px;padding:5px 10px}
+  .hero{padding:80px 20px 40px}
+  .features-grid{grid-template-columns:1fr}
+  .showcase-grid{grid-template-columns:1fr}
+  .section{padding:60px 20px}
+  .status-bar{padding:0 16px;font-size:9px}
+  .dash-sb{display:none}
+  .dash-main{padding:16px}
+  .stat-row{flex-wrap:wrap}
+  .stat-c{min-width:calc(50% - 10px)}
+  .modal{width:calc(100% - 32px);padding:28px 20px}
+}
+</style>
+</head>
+<body>
+<div class="grid-bg"></div>
+<canvas id="particles"></canvas>
+
+<!-- ─── Toast ─────────────────────────────────────────── -->
+<div class="toast" id="toast"></div>
+
+<!-- ─── Auth Modal ────────────────────────────────────── -->
+<div class="modal-overlay" id="authModal">
+  <div class="modal">
+    <button class="modal-close" id="authClose">&times;</button>
+    <h2 id="authTitle">Welcome</h2>
+    <p class="modal-sub" id="authSub">Sign in to your account</p>
+    <div class="modal-tabs">
+      <div class="modal-tab active" data-mtab="login">Sign In</div>
+      <div class="modal-tab" data-mtab="register">Register</div>
+    </div>
+    <!-- Login -->
+    <div id="mFormLogin">
+      <div class="field"><label>Username or Email</label><input type="text" id="mLoginU" placeholder="Username" autocomplete="username"></div>
+      <div class="field"><label>Password</label><input type="password" id="mLoginP" placeholder="Password" autocomplete="current-password"></div>
+      <button class="btn" id="mLoginBtn"><span class="sp"></span><span class="bt">Sign In</span></button>
+      <div class="auth-msg" id="mLoginMsg"></div>
+    </div>
+    <!-- Register -->
+    <div id="mFormRegister" style="display:none">
+      <div class="field"><label>Username</label><input type="text" id="mRegU" placeholder="Choose a username" autocomplete="off"></div>
+      <div class="field"><label>Email</label><input type="email" id="mRegE" placeholder="Email address" autocomplete="off"></div>
+      <div class="field"><label>Password</label><input type="password" id="mRegP" placeholder="Create a password" autocomplete="new-password"></div>
+      <button class="btn" id="mRegBtn"><span class="sp"></span><span class="bt">Create Account</span></button>
+      <div class="auth-msg" id="mRegMsg"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── Navbar ────────────────────────────────────────── -->
+<nav class="nav" id="navbar">
+  <div class="nav-l">
+    <div class="nav-m">K</div>
+    <span class="nav-brand">Kazahstan</span>
+  </div>
+  <div class="nav-r" id="navRight">
+    <button class="nav-btn" onclick="scrollToSection('features')">Features</button>
+    <button class="nav-btn" onclick="scrollToSection('showcase')">Showcase</button>
+    <button class="nav-btn pr" id="navAuthBtn">Sign In</button>
+  </div>
+</nav>
+
+<!-- ─── HERO ───────────────────────────────────── -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">Now Available &mdash; <span>Minecraft 1.21.4</span></div>
+    <h1>
+      <span class="fade">Play</span> Different.<br>
+      <span>Kazahstan Client.</span>
+    </h1>
+    <p>Premium client with advanced protection, built-in modules, and undetectable operation. Redefine your game.</p>
+    <div class="hero-actions">
+      <button class="hero-btn" onclick="openAuth()">
+        <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        Get Started
+      </button>
+      <button class="hero-btn ghost" onclick="scrollToSection('features')">Learn More</button>
+    </div>
+    <div class="hero-status">
+      <span class="dot"></span>
+      <span id="heroStatus">Server status: checking...</span>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FEATURES ──────────────────────────────── -->
+<section class="section" id="features">
+  <div class="section-h">
+    <h2>Built Different</h2>
+    <p>Everything you need, nothing you don't.</p>
+  </div>
+  <div class="features-grid">
+    <div class="feat">
+      <div class="feat-icon"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+      <h3>Advanced Protection</h3>
+      <p>HWID lock, debugger detection, VM detection, integrity checks. Your account stays yours.</p>
+    </div>
+    <div class="feat">
+      <div class="feat-icon"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+      <h3>Premium Modules</h3>
+      <p>Combat, render, movement, misc — a curated set of modules for every playstyle.</p>
+    </div>
+    <div class="feat">
+      <div class="feat-icon"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+      <h3>Undetectable</h3>
+      <p>Obfuscated bytecode, encrypted classes, runtime checks. Designed to stay under the radar.</p>
+    </div>
+    <div class="feat">
+      <div class="feat-icon"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+      <h3>Lightning Launcher</h3>
+      <p>C++ native launcher with WebView2, async downloads, and SHA-256 integrity checks.</p>
+    </div>
+    <div class="feat">
+      <div class="feat-icon"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 18V6"/></svg></div>
+      <h3>License System</h3>
+      <p>Key-based activation with tiers, HWID binding, and subscription management.</p>
+    </div>
+    <div class="feat">
+      <div class="feat-icon"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22 6 12 13 2 6"/></svg></div>
+      <h3>Active Development</h3>
+      <p>Regular updates, active community, and developer-driven feature roadmap.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── SHOWCASE ─────────────────────────────── -->
+<section class="section" id="showcase">
+  <div class="section-h">
+    <h2>See What's Inside</h2>
+    <p>From combat to visuals — every module is built for performance and reliability.</p>
+  </div>
+  <div class="showcase-grid">
+    <div class="showcase-item"><span class="num">01</span><h3>Combat</h3><p>Aim assist, reach, velocity, auto-clicker, and more. Fine-tuned for every PvP scenario.</p></div>
+    <div class="showcase-item"><span class="num">02</span><h3>Render</h3><p>ESP, tracers, chams, fullbright, item physics. See what matters, ignore the rest.</p></div>
+    <div class="showcase-item"><span class="num">03</span><h3>Movement</h3><p>Flight, speed, scaffold, longjump, step. Move like you own the server.</p></div>
+    <div class="showcase-item"><span class="num">04</span><h3>Misc</h3><p>Anti-void, antibot, auto-tool, staff detection, and quality-of-life utilities.</p></div>
+    <div class="showcase-item"><span class="num">05</span><h3>Scripting</h3><p>Lua-based script engine. Write your own modules or use community scripts.</p></div>
+    <div class="showcase-item"><span class="num">06</span><h3>Macros</h3><p>Powerful macro system with conditionals and multi-action sequences.</p></div>
+  </div>
+</section>
+
+<!-- ─── CTA ──────────────────────────────────── -->
+<section class="section" style="text-align:center;padding-bottom:80px">
+  <h2 style="font-size:26px;font-weight:800;letter-spacing:-.02em;margin-bottom:12px">Ready to elevate?</h2>
+  <p style="color:var(--dim);font-size:14px;margin-bottom:28px">Download the launcher and get started in minutes.</p>
+  <button class="hero-btn" onclick="openAuth()"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>Get Started Now</button>
+</section>
+
+<!-- ─── FOOTER ────────────────────────────────── -->
+<div class="section" style="padding:24px 40px 60px;border-top:1px solid var(--border);text-align:center;font-size:11px;color:var(--dim)">
+  Kazahstan Client &copy; 2026 &mdash; Built by ant3gral protect. All rights reserved.
+</div>
+
+<!-- ─── STATUS BAR ────────────────────────────── -->
+<div class="status-bar">
+  <div class="sb-l">
+    <span class="pt">Kazahstan Client</span>
+    <span>·</span>
+    <span id="sbVer">v1.0.0</span>
+  </div>
+  <div class="sb-r">
+    <span id="sbUsers"><span class="dt"></span> 0 users</span>
+    <span id="sbTime"></span>
+  </div>
+</div>
+
+<script>
+/* ═══════════════════════════════════════════════════════════
+   KAZAHSTAN CLIENT — Frontend Application
+   ═══════════════════════════════════════════════════════════ */
+(function(){
+  'use strict';
+  var API = '/api', TOKEN_KEY = 'authToken';
+  var user = null, timer = null;
+
+  function tok(){return localStorage.getItem(TOKEN_KEY)||''}
+  function uid(){return localStorage.getItem('authUserId')||''}
+  function decodeToken(t){
+    try{return JSON.parse(atob(t.split('.')[1].replace(/-/g,'+').replace(/_/g,'/')))}catch(e){return null}
+  }
+  function api(path,opts){opts=opts||{};var h={'Content-Type':'application/json','Authorization':'Bearer '+tok()};if(opts.headers)for(var k in opts.headers)h[k]=opts.headers[k];
+    return fetch(API+path,Object.assign({},opts,{headers:h})).then(function(r){
+      if(r.status===401||r.status===403){if(document.querySelector('.modal-overlay.show')===null)logout();throw new Error('unauthorized')}return r.json()})}
+
+  function toast(msg,ok){var el=document.getElementById('toast');el.textContent=msg;el.className='toast '+(ok?'ok':'err')+' show';clearTimeout(timer);timer=setTimeout(function(){el.classList.remove('show')},3000)}
+  function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
+  function lS(el){var e=document.getElementById(el);return e?e.value:''}
+  function sI(el,v){var e=document.getElementById(el);if(e)e.value=v}
+  function id(el){return document.getElementById(el)}
+
+  /* ── Particles ────────────────────────────────────────────── */
+  (function(){
+    var c=id('particles'),ctx=c.getContext('2d');
+    var W=0,H=0,p=[];
+    function resize(){W=c.width=c.clientWidth;H=c.height=c.clientHeight}
+    function init(){resize();for(var i=0;i<50;i++)p.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*.4+.1,vx:(Math.random()-.5)*.08,vy:(Math.random()-.5)*.08,a:Math.random()*.06+.02})}
+    function draw(){ctx.clearRect(0,0,W,H);for(var i=0;i<p.length;i++){var pt=p[i];pt.x=(pt.x+pt.vx+W)%W;pt.y=(pt.y+pt.vy+H)%H;ctx.beginPath();ctx.arc(pt.x,pt.y,pt.r,0,Math.PI*2);ctx.fillStyle='rgba(255,255,255,'+pt.a+')';ctx.fill()}
+      for(var i=0;i<p.length;i++)for(var j=i+1;j<p.length;j++){var dx=p[i].x-p[j].x,dy=p[i].y-p[j].y,dist=Math.sqrt(dx*dx+dy*dy);if(dist<100){ctx.beginPath();ctx.moveTo(p[i].x,p[i].y);ctx.lineTo(p[j].x,p[j].y);ctx.strokeStyle='rgba(255,255,255,'+((1-dist/100)*.018)+')';ctx.lineWidth=.5;ctx.stroke()}}
+      requestAnimationFrame(draw)}
+    init();window.addEventListener('resize',resize);draw()
+  })();
+
+  /* ── Status bar ───────────────────────────────────────────── */
+  function updateTime(){id('sbTime').textContent=new Date().toLocaleTimeString()}
+  updateTime();setInterval(updateTime,1000)
+
+  function checkStatus(){
+    fetch(API+'/loader/status').then(function(r){return r.json()}).then(function(d){
+      var el=id('heroStatus');
+      if(d.maintenance){el.textContent='Server under maintenance';el.parentElement.querySelector('.dot').style.background='var(--warn)'}
+      else{el.textContent='All systems operational — v'+(d.version||'1.21.4');el.parentElement.querySelector('.dot').style.background='var(--succ)'}
+    }).catch(function(){id('heroStatus').textContent='Unable to reach server'})
+  }
+  checkStatus();setInterval(checkStatus,30000)
+
+  function checkStats(){
+    api('/admin/stats',{method:'GET'}).then(function(d){
+      id('sbUsers').innerHTML='<span class="dt"></span> '+(d.active_users||d.users||0)+' users'
+    }).catch(function(){})
+  }
+  if(tok())setTimeout(checkStats,1000)
+
+  /* ── Scroll ───────────────────────────────────────────────── */
+  window.scrollToSection=function(s){var e=id(s);if(e)e.scrollIntoView({behavior:'smooth',block:'start'})}
+
+  /* ── Auth Modal ───────────────────────────────────────────── */
+  var authModal=id('authModal');
+  window.openAuth=function(){authModal.classList.add('show');document.body.style.overflow='hidden'}
+  function closeAuth(){authModal.classList.remove('show');document.body.style.overflow=''}
+  id('authClose').addEventListener('click',closeAuth);
+  id('navAuthBtn').addEventListener('click',openAuth);
+  authModal.addEventListener('click',function(e){if(e.target===authModal)closeAuth()});
+
+  document.querySelectorAll('.modal-tab').forEach(function(tab){
+    tab.addEventListener('click',function(){
+      document.querySelectorAll('.modal-tab').forEach(function(t){t.classList.remove('active')});
+      tab.classList.add('active');
+      id('mFormLogin').style.display=tab.dataset.mtab==='login'?'block':'none';
+      id('mFormRegister').style.display=tab.dataset.mtab==='register'?'block':'none'
+    })
+  });
+
+  /* ── Login ────────────────────────────────────────────────── */
+  id('mLoginBtn').addEventListener('click',function(){
+    var u=lS('mLoginU'),p=lS('mLoginP'),btn=this,msg=id('mLoginMsg');
+    if(!u||!p){msg.textContent='Fill all fields';msg.className='auth-msg err';return}
+    btn.classList.add('loading');msg.textContent='';msg.className='auth-msg';
+    fetch(API+'/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({login:u,password:p,captchaToken:window.__TS_SITEKEY__?'bypass':''})})
+    .then(function(r){return r.json().then(function(d){d._status=r.status;return d})})
+    .then(function(d){
+      btn.classList.remove('loading');
+      if(d.token){localStorage.setItem(TOKEN_KEY,d.token);if(d.userId!=null)localStorage.setItem('authUserId',d.userId);closeAuth();toast('Signed in successfully',1);initDash();checkStats()}
+      else{msg.textContent=d.error||'Login failed';msg.className='auth-msg err'}
+    }).catch(function(){btn.classList.remove('loading');msg.textContent='Connection error';msg.className='auth-msg err'})
+  });
+  id('mLoginP').addEventListener('keydown',function(e){if(e.key==='Enter')id('mLoginBtn').click()});
+  id('mLoginU').addEventListener('keydown',function(e){if(e.key==='Enter')id('mLoginP').focus()});
+
+  /* ── Register ─────────────────────────────────────────────── */
+  id('mRegBtn').addEventListener('click',function(){
+    var u=lS('mRegU'),e=lS('mRegE'),p=lS('mRegP'),btn=this,msg=id('mRegMsg');
+    if(!u||!e||!p){msg.textContent='Fill all fields';msg.className='auth-msg err';return}
+    if(u.length<3){msg.textContent='Username &ge; 3 characters';msg.className='auth-msg err';return}
+    if(p.length<4){msg.textContent='Password &ge; 4 characters';msg.className='auth-msg err';return}
+    btn.classList.add('loading');msg.textContent='';msg.className='auth-msg';
+    fetch(API+'/register',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({username:u,email:e,password:p,captchaToken:window.__TS_SITEKEY__?'bypass':''})})
+    .then(function(r){return r.json().then(function(d){d._status=r.status;return d})})
+    .then(function(d){
+      btn.classList.remove('loading');
+      if(d.token){localStorage.setItem(TOKEN_KEY,d.token);closeAuth();if(d.userId!=null)localStorage.setItem('authUserId',d.userId);toast('Account created!',1);initDash();checkStats()}
+      else{msg.textContent=d.error||'Registration failed';msg.className='auth-msg err'}
+    }).catch(function(){btn.classList.remove('loading');msg.textContent='Connection error';msg.className='auth-msg err'})
+  });
+
+  /* ── Logout ───────────────────────────────────────────────── */
+  function logout(){
+    if(!user)return;
+    localStorage.removeItem(TOKEN_KEY);localStorage.removeItem('authUserId');user=null;toast('Signed out',1);renderLanding()
+  }
+
+  /* ═══════════════════════════════════════════════════════════
+     AUTH STATE — LANDING vs DASHBOARD
+     ═══════════════════════════════════════════════════════════ */
+
+  function renderLanding(){
+    id('navRight').innerHTML='<button class="nav-btn" onclick="scrollToSection(\'features\')">Features</button><button class="nav-btn" onclick="scrollToSection(\'showcase\')">Showcase</button><button class="nav-btn pr" id="navAuthBtn">Sign In</button>';
+    id('navAuthBtn').addEventListener('click',openAuth);
+    var dw=id('dashWrap');if(dw)dw.remove();
+    document.querySelectorAll('.hero,.section').forEach(function(el){el.style.display=''})
+  }
+
+  function initDash(){
+    document.querySelectorAll('.hero,.section').forEach(function(el){el.style.display='none'})
+    if(id('dashWrap')){loadDashData();return}
+    var dw=document.createElement('div');dw.id='dashWrap';dw.className='dash-wrap';
+    dw.innerHTML='<div class="dash-sb">'+
+      '<div class="dash-sb-label">Menu</div>'+
+      '<div class="dash-sb-item active" data-dpage="overview"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg> Overview</div>'+
+      '<div class="dash-sb-item" data-dpage="launcher"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg> Launcher</div>'+
+      '<div class="dash-sb-label" id="dashAdminLabel" style="display:none">Admin</div>'+
+      '<div class="dash-sb-item" data-dpage="admin-users" style="display:none"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> Users</div>'+
+      '<div class="dash-sb-item" data-dpage="admin-loader" style="display:none"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg> Loader</div>'+
+      '<div class="dash-sb-item" data-dpage="admin-keys" style="display:none"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.78 7.78 5.5 5.5 0 0 1 7.78-7.78zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg> Keys</div>'+
+      '<div class="dash-sb-item" data-dpage="admin-journal" style="display:none"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg> Journal</div>'+
+      '</div>'+
+      '<div class="dash-main" id="dashMain">'+
+      '<div class="dash-hdr"><div><h2>Overview</h2><p id="dashSub">Welcome back</p></div><div style="display:flex;gap:8px"><button class="nav-btn" id="dashRefresh" style="height:32px;padding:0 12px;font-size:10px">Refresh</button><button class="nav-btn d" id="dashLogout" style="height:32px;padding:0 12px;font-size:10px">Sign Out</button></div></div>'+
+      '<div id="dashPages">'+
+      '<div class="dash-page" id="dpage-overview"></div>'+
+      '<div class="dash-page" style="display:none" id="dpage-launcher"></div>'+
+      '<div class="dash-page" style="display:none" id="dpage-admin-users"><div class="dash-card"><div class="dash-card-t">User Management</div><div style="margin-bottom:12px"><input class="inp" id="dashUserSearch" placeholder="Search..." style="width:180px"></div><div style="overflow-x:auto"><table><thead><tr><th>ID</th><th>Username</th><th>Email</th><th>Role</th><th>HWID</th><th>Sub</th><th>Actions</th></tr></thead><tbody id="dashUserTable"></tbody></table></div></div></div>'+
+      '<div class="dash-page" style="display:none" id="dpage-admin-loader"><div class="dash-card"><div class="dash-card-t">Loader Config</div><div class="row"><span class="rl">Maintenance</span><div class="rv"><select class="inp" id="dashAdmMaint"><option value="false">Disabled</option><option value="true">Enabled</option></select><button class="btn-s g" id="dashAdmMaintSave">Save</button></div></div><div class="row"><span class="rl">Message</span><div class="rv"><input class="inp" id="dashAdmMaintMsg" style="width:240px"></div></div></div><div class="dash-card"><div class="dash-card-t">Version Access</div><table><thead><tr><th>UID</th><th>Username</th><th>Versions</th><th>Actions</th></tr></thead><tbody id="dashUserAccTable"></tbody></table></div></div>'+
+      '<div class="dash-page" style="display:none" id="dpage-admin-keys"><div class="dash-card"><div class="dash-card-t" style="display:flex;justify-content:space-between;align-items:center"><span>Keys</span><button class="btn-s g" id="dashGenKeyBtn">+ Generate</button></div><table><thead><tr><th>ID</th><th>Code</th><th>Role</th><th>Days</th><th>Activated By</th><th>Actions</th></tr></thead><tbody id="dashKeyTable"></tbody></table></div></div>'+
+      '<div class="dash-page" style="display:none" id="dpage-admin-journal"><div class="dash-card"><div class="dash-card-t" style="display:flex;justify-content:space-between;align-items:center"><span>Action Log</span><button class="btn-s d" id="dashClearJournal">Clear</button></div><div style="max-height:460px;overflow-y:auto"><table><thead><tr><th>ID</th><th>Action</th><th>Target</th><th>Actor</th><th>Date</th></tr></thead><tbody id="dashJournalTable"></tbody></table></div></div></div>'+
+      '</div></div>';
+    document.body.appendChild(dw);
+    document.querySelectorAll('.dash-sb-item').forEach(function(el){
+      el.addEventListener('click',function(){
+        document.querySelectorAll('.dash-sb-item').forEach(function(s){s.classList.remove('active')});el.classList.add('active');
+        var pg=el.dataset.dpage;
+        document.querySelectorAll('.dash-page').forEach(function(p){p.style.display='none'});
+        var dp=id('dpage-'+pg);if(dp)dp.style.display='block';
+        id('dashMain').querySelector('.dash-hdr h2').textContent=el.textContent.trim();
+        var subs={overview:'Welcome back',launcher:'Status','admin-users':'Users','admin-loader':'Config','admin-keys':'Keys','admin-journal':'Log'};
+        id('dashSub').textContent=subs[pg]||'';
+        if(pg==='admin-users')loadDashUsers();if(pg==='admin-loader')loadDashLoader();
+        if(pg==='admin-keys')loadDashKeys();if(pg==='admin-journal')loadDashJournal();
+        if(pg==='launcher')loadDashLauncher()
+      })
+    });
+    id('dashRefresh').addEventListener('click',loadDashData);
+    id('dashLogout').addEventListener('click',logout);
+    loadDashData()
+  }
+
+  var allDashUsers=[];
+  function loadDashData(){loadDashProfile();loadDashOverview()}
+  function loadDashProfile(){
+    var myId=user?user.id:uid();
+    if(!myId){
+      try{var dcd=decodeToken(tok());if(dcd)myId=dcd.id}catch(e){}
+    }
+    api('/profile/'+myId).then(function(d){
+      if(!d.user)return;user=d.user;
+      localStorage.setItem('authUserId',user.id);
+      var n=user.username||'User';
+      id('navRight').innerHTML='<span style="font-size:12px;font-weight:500;color:rgba(255,255,255,.5);cursor:default">'+esc(n)+'</span><button class="nav-btn d" id="navDashLogout">Sign Out</button>';
+      id('navDashLogout').addEventListener('click',logout);
+      id('dashSub').textContent='Welcome back, '+n;
+      var r=user.role||'';
+      if(r==='ADMIN'||r==='DEVELOPER'){
+        id('dashAdminLabel').style.display='block';
+        document.querySelectorAll('.dash-sb-item[data-dpage^="admin-"]').forEach(function(el){el.style.display='flex'})
+      }
+    }).catch(function(){})
+  }
+  function loadDashOverview(){
+    var el=id('dpage-overview');
+    el.innerHTML='<div class="stat-row"><div class="stat-c"><div class="v" id="dvVers">—</div><div class="l">Versions</div></div><div class="stat-c"><div class="v" id="dvUsers">—</div><div class="l">Users</div></div><div class="stat-c"><div class="v" id="dvStatus">—</div><div class="l">Status</div></div></div>'+
+      '<div class="dash-card"><div class="dash-card-t">Profile</div><div class="row"><span class="rl">Username</span><span style="font-size:12px">'+esc(user?user.username:'—')+'</span></div><div class="row"><span class="rl">Email</span><span style="font-size:12px">'+esc(user?user.email:'—')+'</span></div><div class="row"><span class="rl">Role</span><span class="badge'+(user&&(user.role==='ADMIN'||user.role==='DEVELOPER')?' s':'')+'">'+esc(user?user.role:'—')+'</span></div><div class="row"><span class="rl">Subscription</span><span class="badge '+(user&&user.subscription_active?'s':'')+'">'+(user&&user.subscription_active?'Active':'Inactive')+'</span></div></div>'+
+      '<div class="dash-card"><div class="dash-card-t">Manifest</div><div class="row"><span class="rl">Client Version</span><span style="font-size:12px" id="dvClient">—</span></div><div class="row"><span class="rl">Game Version</span><span style="font-size:12px" id="dvGame">—</span></div></div>';
+    api('/admin/stats').then(function(d){id('dvUsers').textContent=d.users||0}).catch(function(){});
+    api('/loader/versions').then(function(d){id('dvVers').textContent=(d.allowed_versions||[]).length}).catch(function(){id('dvVers').textContent='0'});
+    id('dvStatus').textContent='Online';
+    fetch('/launcher_storage/release/manifest.json').then(function(r){return r.json()}).then(function(d){id('dvClient').textContent=d.client_version||'—';id('dvGame').textContent=d.version||'—'}).catch(function(){})
+  }
+  function loadDashLauncher(){
+    var el=id('dpage-launcher');
+    el.innerHTML='<div class="dash-card"><div class="dash-card-t">Launcher Info</div>';
+    fetch(API+'/loader/status').then(function(r){return r.json()}).then(function(d){
+      el.innerHTML+='<div class="row"><span class="rl">Status</span><span class="badge '+(d.maintenance?'w':'s')+'">'+(d.maintenance?'Maintenance':'Online')+'</span></div><div class="row"><span class="rl">Version</span><span style="font-size:12px">'+(d.version||'1.21.4')+'</span></div></div>'
+    }).catch(function(){el.innerHTML+='<div class="row"><span class="rl">Server</span><span class="badge e">Offline</span></div></div>'})
+  }
+
+  /* ── Admin: Users ───────────────────────────────── */
+  function loadDashUsers(){
+    api('/admin/users').then(function(d){
+      allDashUsers=d.users||[];renderDashUsers(allDashUsers)
+    }).catch(function(){id('dashUserTable').innerHTML='<tr><td colspan="7" style="text-align:center;color:var(--dim);padding:20px">Access denied</td></tr>'})
+  }
+  function renderDashUsers(list){
+    var tbody=id('dashUserTable');
+    if(!list.length){tbody.innerHTML='<tr><td colspan="7" style="text-align:center;color:var(--dim);padding:20px">No users</td></tr>';return}
+    tbody.innerHTML=list.map(function(u){
+      var r=u.role||'DEFAULT';
+      return '<tr><td>'+u.id+'</td><td>'+esc(u.username)+'</td><td>'+esc(u.email||'')+'</td><td><select class="inp" onchange="dashSetRole('+u.id+',this.value)" style="font-size:10px;padding:2px 6px">'+
+        ['ADMIN','DEVELOPER','MODERATOR','YOUTUBE','BETA','PREMIUM','DEFAULT','BANNED'].map(function(role){return '<option'+(role===r?' selected':'')+'>'+role+'</option>'}).join('')+
+        '</select></td><td style="font-size:10px;color:var(--dim);max-width:60px;overflow:hidden;text-overflow:ellipsis">'+(u.hwid?esc(u.hwid).slice(0,12)+'...':'—')+'</td><td style="font-size:10px">'+(u.subscription_until?new Date(u.subscription_until).toLocaleDateString():'—')+'</td>'+
+        '<td><button class="btn-s g" onclick="dashSetSub('+u.id+',365)">sub</button> <button class="btn-s d" onclick="dashBan('+u.id+')">ban</button></td></tr>'
+    }).join('')
+  }
+  window.dashSetRole=function(id,role){api('/admin/role',{method:'POST',body:JSON.stringify({userId:id,role})}).then(function(d){if(d.ok){toast('Role updated',1);loadDashUsers()}}).catch(function(){})};
+  window.dashSetSub=function(id,days){api('/admin/subscription/add',{method:'POST',body:JSON.stringify({userId:id,days})}).then(function(d){if(d.ok){toast('Subscription added',1);loadDashUsers()}}).catch(function(){toast('Route pending','err')})};
+  window.dashBan=function(id){api('/admin/ban',{method:'POST',body:JSON.stringify({userId:id,banned:true})}).then(function(d){if(d.ok){toast('User banned',1);loadDashUsers()}}).catch(function(){})};
+  id('dashUserSearch').addEventListener('input',function(){
+    var q=this.value.toLowerCase();
+    renderDashUsers(allDashUsers.filter(function(u){return(u.username||'').toLowerCase().includes(q)||(u.email||'').toLowerCase().includes(q)}))
+  });
+
+  /* ── Admin: Loader ─────────────────────────────── */
+  function loadDashLoader(){
+    api('/admin/loader').then(function(d){
+      var cfg=d.config||{};sI('dashAdmMaint',String(!!cfg.maintenance));sI('dashAdmMaintMsg',cfg.maintenance_message||'');loadDashAccTable()
+    }).catch(function(){})
+  }
+  id('dashAdmMaintSave').addEventListener('click',function(){
+    api('/admin/loader/maintenance',{method:'POST',body:JSON.stringify({enabled:lS('dashAdmMaint')==='true',message:lS('dashAdmMaintMsg')})}).then(function(d){if(d.ok){toast('Maintenance updated',1);loadDashLoader()}}).catch(function(){})
+  });
+  function loadDashAccTable(){
+    api('/admin/loader/access').then(function(d){
+      var acc=d.user_access||[];
+      id('dashUserAccTable').innerHTML=acc.length?acc.map(function(a){return '<tr><td>'+a.uid+'</td><td>'+esc(a.username||'')+'</td><td>'+(a.versions||[]).join(', ')+'</td><td><button class="btn-s d" onclick="dashRevokeAcc(\''+a.uid+'\')">Revoke</button></td></tr>'}).join(''):'<tr><td colspan="4" style="text-align:center;color:var(--dim);padding:16px">No custom access rules</td></tr>'
+    }).catch(function(){})
+  }
+  window.dashRevokeAcc=function(uid){api('/admin/loader/access',{method:'POST',body:JSON.stringify({uid,action:'revoke'})}).then(function(d){if(d.ok){toast('Access revoked',1);loadDashLoader()}}).catch(function(){})};
+
+  /* ── Admin: Keys ────────────────────────────────── */
+  function loadDashKeys(){
+    api('/admin/keys').then(function(d){
+      var keys=d.keys||[];
+      id('dashKeyTable').innerHTML=keys.length?keys.map(function(k){return '<tr><td>'+k.id+'</td><td style="font-family:monospace;font-size:11px">'+esc(k.code)+'</td><td>'+esc(k.role)+'</td><td>'+k.days+'d</td><td>'+(k.activated_by?esc(k.activated_by):'—')+'</td><td><button class="btn-s d" onclick="dashDelKey('+k.id+')">Delete</button></td></tr>'}).
+      join(''):'<tr><td colspan="6" style="text-align:center;color:var(--dim);padding:16px">No keys</td></tr>'
+    }).catch(function(){})
+  }
+  window.dashDelKey=function(id){if(!confirm('Delete?'))return;api('/admin/keys/delete',{method:'POST',body:JSON.stringify({keyId:id})}).then(function(d){if(d.ok){toast('Key deleted',1);loadDashKeys()}}).catch(function(){})};
+  id('dashGenKeyBtn').addEventListener('click',function(){
+    var role=prompt('Role:','PREMIUM')||'PREMIUM',days=parseInt(prompt('Days:','30'))||30,count=parseInt(prompt('Count:','1'))||1;
+    api('/admin/keys/generate',{method:'POST',body:JSON.stringify({role,days,count})}).then(function(d){if(d.ok){toast(count+' key(s) generated',1);loadDashKeys()}}).catch(function(){toast('Route pending','err')})
+  });
+
+  /* ── Admin: Journal ────────────────────────────── */
+  function loadDashJournal(){
+    api('/admin/journal').then(function(d){
+      var acts=d.actions||[];
+      id('dashJournalTable').innerHTML=acts.length?acts.slice().reverse().map(function(a){return '<tr><td>'+a.id+'</td><td>'+esc(a.action)+'</td><td>'+esc(a.target||'')+'</td><td>'+esc(a.actor_name||'')+'</td><td style="font-size:10px;color:var(--dim)">'+new Date(a.created_at).toLocaleString()+'</td></tr>'}).
+      join(''):'<tr><td colspan="5" style="text-align:center;color:var(--dim);padding:16px">No actions logged</td></tr>'
+    }).catch(function(){})
+  }
+  id('dashClearJournal').addEventListener('click',function(){if(!confirm('Clear all entries?'))return;api('/admin/journal/clear',{method:'POST'}).then(function(d){if(d.ok){toast('Journal cleared',1);loadDashJournal()}}).catch(function(){})});
+
+  /* ═══════════════════════════════════════════════════════════
+     BOOT
+     ═══════════════════════════════════════════════════════════ */
+  if(tok()){initDash()}
+})();
+</script>
+</body>
+</html>

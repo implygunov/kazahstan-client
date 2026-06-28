@@ -1,0 +1,86 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "admin",
+      "email": "admin@cry.dlc",
+      "password": "$2a$10$QzHne3TvlFKJkpHawct7xeRMNzXyHoRPb5fQUkbnXcr.7q612.1A2",
+      "role": "DEVELOPER",
+      "hwid": null,
+      "subscription_until": "2099-12-31T23:59:59.999Z",
+      "premium_until": "2099-12-31T23:59:59.999Z",
+      "ram": 8192,
+      "created_at": "2024-01-01T00:00:00.000Z"
+    },
+    {
+      "id": 2,
+      "username": "moder",
+      "email": "moder@cry.dlc",
+      "password": "$2a$10$QzHne3TvlFKJkpHawct7xeRMNzXyHoRPb5fQUkbnXcr.7q612.1A2",
+      "role": "MODERATOR",
+      "hwid": null,
+      "subscription_until": null,
+      "premium_until": null,
+      "ram": 4096,
+      "created_at": "2024-01-01T00:00:00.000Z"
+    },
+    {
+      "id": 3,
+      "username": "user",
+      "email": "user@cry.dlc",
+      "password": "$2a$10$QzHne3TvlFKJkpHawct7xeRMNzXyHoRPb5fQUkbnXcr.7q612.1A2",
+      "role": "DEFAULT",
+      "hwid": null,
+      "subscription_until": null,
+      "premium_until": null,
+      "ram": 2048,
+      "created_at": "2024-01-01T00:00:00.000Z"
+    }
+  ],
+  "keys": [
+    {
+      "id": 1,
+      "code": "KZ-C0H9M25G9Z7R",
+      "role": "BETA",
+      "days": 30,
+      "activated_by": null,
+      "activated_at": null,
+      "created_at": "2026-06-07T15:35:27.837Z"
+    }
+  ],
+  "promocodes": [
+    {
+      "id": 1,
+      "code": "HELLO10",
+      "discount_percent": 10,
+      "created_at": "2024-01-01T00:00:00.000Z"
+    }
+  ],
+  "tickets": [],
+  "ticket_messages": [],
+  "journal": [
+    {
+      "id": 1,
+      "action": "key_generate",
+      "target": "count:1",
+      "meta": "role:BETA,days:30",
+      "actor_name": "admin",
+      "actor_id": 1,
+      "actor_role": "DEVELOPER",
+      "created_at": "2026-06-07T15:35:27.840Z"
+    }
+  ],
+  "stats": {
+    "users": 3,
+    "launches": 0,
+    "days": 0
+  },
+  "sequences": {
+    "users": 3,
+    "keys": 1,
+    "tickets": 0,
+    "promocodes": 1,
+    "journal": 1,
+    "messages": 0
+  }
+}
