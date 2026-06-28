@@ -330,55 +330,6 @@ if(!localStorage.getItem('authToken')){window.location.href='index.html'}
   /* ── Scroll ───────────────────────────────────────────────── */
   window.scrollToSection=function(s){var e=id(s);if(e)e.scrollIntoView({behavior:'smooth',block:'start'})}
 
-  /* ── Auth Modal ───────────────────────────────────────────── */
-  var authModal=id('authModal');
-  window.openAuth=function(){authModal.classList.add('show');document.body.style.overflow='hidden'}
-  function closeAuth(){authModal.classList.remove('show');document.body.style.overflow=''}
-  id('authClose').addEventListener('click',closeAuth);
-  id('navAuthBtn').addEventListener('click',openAuth);
-  authModal.addEventListener('click',function(e){if(e.target===authModal)closeAuth()});
-
-  document.querySelectorAll('.modal-tab').forEach(function(tab){
-    tab.addEventListener('click',function(){
-      document.querySelectorAll('.modal-tab').forEach(function(t){t.classList.remove('active')});
-      tab.classList.add('active');
-      id('mFormLogin').style.display=tab.dataset.mtab==='login'?'block':'none';
-      id('mFormRegister').style.display=tab.dataset.mtab==='register'?'block':'none'
-    })
-  });
-
-  /* ── Login ────────────────────────────────────────────────── */
-  id('mLoginBtn').addEventListener('click',function(){
-    var u=lS('mLoginU'),p=lS('mLoginP'),btn=this,msg=id('mLoginMsg');
-    if(!u||!p){msg.textContent='Fill all fields';msg.className='auth-msg err';return}
-    btn.classList.add('loading');msg.textContent='';msg.className='auth-msg';
-    fetch(API+'/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({login:u,password:p,captchaToken:window.__TS_SITEKEY__?'bypass':''})})
-    .then(function(r){return r.json().then(function(d){d._status=r.status;return d})})
-    .then(function(d){
-      btn.classList.remove('loading');
-      if(d.token){localStorage.setItem(TOKEN_KEY,d.token);if(d.userId!=null)localStorage.setItem('authUserId',d.userId);closeAuth();toast('Signed in successfully',1);window.location.href='profile.html'}
-      else{msg.textContent=d.error||'Login failed';msg.className='auth-msg err'}
-    }).catch(function(){btn.classList.remove('loading');msg.textContent='Connection error';msg.className='auth-msg err'})
-  });
-  id('mLoginP').addEventListener('keydown',function(e){if(e.key==='Enter')id('mLoginBtn').click()});
-  id('mLoginU').addEventListener('keydown',function(e){if(e.key==='Enter')id('mLoginP').focus()});
-
-  /* ── Register ─────────────────────────────────────────────── */
-  id('mRegBtn').addEventListener('click',function(){
-    var u=lS('mRegU'),e=lS('mRegE'),p=lS('mRegP'),btn=this,msg=id('mRegMsg');
-    if(!u||!e||!p){msg.textContent='Fill all fields';msg.className='auth-msg err';return}
-    if(u.length<3){msg.textContent='Username &ge; 3 characters';msg.className='auth-msg err';return}
-    if(p.length<4){msg.textContent='Password &ge; 4 characters';msg.className='auth-msg err';return}
-    btn.classList.add('loading');msg.textContent='';msg.className='auth-msg';
-    fetch(API+'/register',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({username:u,email:e,password:p,captchaToken:window.__TS_SITEKEY__?'bypass':''})})
-    .then(function(r){return r.json().then(function(d){d._status=r.status;return d})})
-    .then(function(d){
-      btn.classList.remove('loading');
-      if(d.token){localStorage.setItem(TOKEN_KEY,d.token);closeAuth();if(d.userId!=null)localStorage.setItem('authUserId',d.userId);toast('Account created!',1);window.location.href='profile.html'}
-      else{msg.textContent=d.error||'Registration failed';msg.className='auth-msg err'}
-    }).catch(function(){btn.classList.remove('loading');msg.textContent='Connection error';msg.className='auth-msg err'})
-  });
-
   /* ── Logout ───────────────────────────────────────────────── */
   function logout(){
     if(!user)return;
@@ -388,13 +339,6 @@ if(!localStorage.getItem('authToken')){window.location.href='index.html'}
   /* ═══════════════════════════════════════════════════════════
      AUTH STATE — LANDING vs DASHBOARD
      ═══════════════════════════════════════════════════════════ */
-
-  function renderLanding(){
-    id('navRight').innerHTML='<button class="nav-btn" onclick="scrollToSection(\'features\')">Features</button><button class="nav-btn" onclick="scrollToSection(\'showcase\')">Showcase</button><button class="nav-btn pr" id="navAuthBtn">Sign In</button>';
-    id('navAuthBtn').addEventListener('click',openAuth);
-    var dw=id('dashWrap');if(dw)dw.remove();
-    document.querySelectorAll('.hero,.section').forEach(function(el){el.style.display=''})
-  }
 
   function initDash(){
     document.querySelectorAll('.hero,.section').forEach(function(el){el.style.display='none'})
@@ -533,7 +477,7 @@ if(!localStorage.getItem('authToken')){window.location.href='index.html'}
       var cfg=d.config||{};sI('dashAdmMaint',String(!!cfg.maintenance));sI('dashAdmMaintMsg',cfg.maintenance_message||'');loadDashAccTable()
     }).catch(function(){})
   }
-  id('dashAdmMaintSave').addEventListener('click',function(){
+  var _el=id('dashAdmMaintSave');if(_el)_el.addEventListener('click',function(){
     api('/admin/loader/maintenance',{method:'POST',body:JSON.stringify({enabled:lS('dashAdmMaint')==='true',message:lS('dashAdmMaintMsg')})}).then(function(d){if(d.ok){toast('Maintenance updated',1);loadDashLoader()}}).catch(function(){})
   });
   function loadDashAccTable(){
@@ -553,7 +497,7 @@ if(!localStorage.getItem('authToken')){window.location.href='index.html'}
     }).catch(function(){})
   }
   window.dashDelKey=function(id){if(!confirm('Delete?'))return;api('/admin/keys/delete',{method:'POST',body:JSON.stringify({keyId:id})}).then(function(d){if(d.ok){toast('Key deleted',1);loadDashKeys()}}).catch(function(){})};
-  id('dashGenKeyBtn').addEventListener('click',function(){
+  var _el=id('dashGenKeyBtn');if(_el)_el.addEventListener('click',function(){
     var role=prompt('Role:','PREMIUM')||'PREMIUM',days=parseInt(prompt('Days:','30'))||30,count=parseInt(prompt('Count:','1'))||1;
     api('/admin/keys/generate',{method:'POST',body:JSON.stringify({role,days,count})}).then(function(d){if(d.ok){toast(count+' key(s) generated',1);loadDashKeys()}}).catch(function(){toast('Route pending','err')})
   });
@@ -566,7 +510,7 @@ if(!localStorage.getItem('authToken')){window.location.href='index.html'}
       join(''):'<tr><td colspan="5" style="text-align:center;color:var(--dim);padding:16px">No actions logged</td></tr>'
     }).catch(function(){})
   }
-  id('dashClearJournal').addEventListener('click',function(){if(!confirm('Clear all entries?'))return;api('/admin/journal/clear',{method:'POST'}).then(function(d){if(d.ok){toast('Journal cleared',1);loadDashJournal()}}).catch(function(){})});
+  var _el=id('dashClearJournal');if(_el)_el.addEventListener('click',function(){if(!confirm('Clear all entries?'))return;api('/admin/journal/clear',{method:'POST'}).then(function(d){if(d.ok){toast('Journal cleared',1);loadDashJournal()}}).catch(function(){})});
 
   /* ─── BOOT ───────────────────────────────────────────────── */
   initDash()
