@@ -563,19 +563,42 @@ select.inp:focus,input.inp:focus{border-color:rgba(255,255,255,.15)}
     if(!myId){
       try{var dcd=decodeToken(tok());if(dcd)myId=dcd.id}catch(e){}
     }
+    if(!myId){
+      // Fallback: use token-based endpoint that reads user id from JWT directly
+      api('/endpoints/profile.php').then(function(d){
+        if(!d.success||!d.user)return;
+        user=d.user;
+        localStorage.setItem('authUserId',user.id);
+        updDashAfterProfile()
+      }).catch(function(){})
+      return
+    }
     api('/profile/'+myId).then(function(d){
       if(!d.user)return;user=d.user;
       localStorage.setItem('authUserId',user.id);
-      var n=user.username||'User';
-      id('navRight').innerHTML='<span style="font-size:12px;font-weight:500;color:rgba(255,255,255,.5);cursor:default">'+esc(n)+'</span><button class="nav-btn d" id="navDashLogout">Sign Out</button>';
-      id('navDashLogout').addEventListener('click',logout);
-      id('dashSub').textContent='Welcome back, '+n;
-      var r=user.role||'';
-      if(r==='ADMIN'||r==='DEVELOPER'){
-        id('dashAdminLabel').style.display='block';
-        document.querySelectorAll('.dash-sb-item[data-dpage^="admin-"]').forEach(function(el){el.style.display='flex'})
-      }
-    }).catch(function(){})
+      updDashAfterProfile()
+    }).catch(function(){
+      // Fallback: try token-based endpoint
+      api('/endpoints/profile.php').then(function(d){
+        if(!d.success||!d.user)return;
+        user=d.user;
+        localStorage.setItem('authUserId',user.id);
+        updDashAfterProfile()
+      }).catch(function(){})
+    })
+  }
+  function updDashAfterProfile(){
+    if(!user)return;
+    localStorage.setItem('authUserId',user.id);
+    var n=user.username||'User';
+    id('navRight').innerHTML='<span style="font-size:12px;font-weight:500;color:rgba(255,255,255,.5);cursor:default">'+esc(n)+'</span><button class="nav-btn d" id="navDashLogout">Sign Out</button>';
+    id('navDashLogout').addEventListener('click',logout);
+    id('dashSub').textContent='Welcome back, '+n;
+    var r=user.role||'';
+    if(r==='ADMIN'||r==='DEVELOPER'){
+      id('dashAdminLabel').style.display='block';
+      document.querySelectorAll('.dash-sb-item[data-dpage^="admin-"]').forEach(function(el){el.style.display='flex'})
+    }
   }
   function loadDashOverview(){
     var el=id('dpage-overview');

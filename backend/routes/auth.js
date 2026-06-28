@@ -1,4 +1,4 @@
-const { Router } = require('express');
+﻿const { Router } = require('express');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { data, save, nextId } = require('../database');
@@ -193,7 +193,7 @@ router.post('/endpoints/set_hwid.php', authMiddleware, async (req, res) => {
   res.json({ success: true });
 });
 
-// ── Login for native Aura loader (auth_service.cpp -> /endpoints/login.php) ──
+// ── Login for native Kazahstan DLC (auth_service.cpp -> /endpoints/login.php) ──
 // Body: { login, password, launcher_version, launcher_build }
 // Success: { success: true, access: "<jwt>" }   Fail: { success: false, error }
 // Subscription is NOT gated here — profile.php reports it and the UI gates the
