@@ -66,6 +66,13 @@ router.get('/download/client', authMiddleware, async (req, res) => {
   cipher.on('error', () => { if (!res.headersSent) res.status(500); res.end(); });
 });
 
+// Отдача ссылки на установщик лаунчера (без авторизации — публичная).
+router.get('/download/loader', (req, res) => {
+  const url = config.LOADER_URL || '';
+  if (!url) return res.status(404).json({ error: 'loader_url_not_configured' });
+  res.json({ url, filename: 'Kazahstan.Client.Setup.exe' });
+});
+
 // Отдача Java-агента (Pillar B). Сам агент не секретен (ключа в нём нет),
 // но раздаём только авторизованному лаунчеру, чтобы не светить публично.
 router.get('/download/agent', authMiddleware, async (req, res) => {

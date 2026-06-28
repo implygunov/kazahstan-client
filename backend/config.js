@@ -80,4 +80,8 @@ module.exports = {
   AGENT_SOURCE_PATH: process.env.AGENT_SOURCE_PATH || require('path').join(__dirname, 'files', 'kzc-agent.jar'),
   // URL агента (GitHub Releases) — для Render. Если задан — приоритетнее PATH.
   AGENT_SOURCE_URL: process.env.AGENT_SOURCE_URL || '',
+
+  // --- Скачивание лаунчера (для страницы профиля) ---
+  // URL установщика лаунчера для Windows. Пользователи скачивают отсюда.
+  LOADER_URL: process.env.LOADER_URL || 'https://github.com/implygunov/kazahstan-client/releases/download/fdffd/Kazahstan.Client.Setup.exe',
 };
