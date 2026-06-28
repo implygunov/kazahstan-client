@@ -308,7 +308,7 @@ if(!localStorage.getItem('authToken')){window.location.href='index.html'}
   })();
 
   /* ── Status bar ───────────────────────────────────────────── */
-  function updateTime(){id('sbTime').textContent=new Date().toLocaleTimeString()}
+  function updateTime(){var el=id('sbTime');if(el)el.textContent=new Date().toLocaleTimeString()}
   updateTime();setInterval(updateTime,1000)
 
   function checkStatus(){
@@ -318,7 +318,8 @@ if(!localStorage.getItem('authToken')){window.location.href='index.html'}
       else{el.textContent='All systems operational — v'+(d.version||'1.21.4');el.parentElement.querySelector('.dot').style.background='var(--succ)'}
     }).catch(function(){id('heroStatus').textContent='Unable to reach server'})
   }
-  checkStatus();setInterval(checkStatus,30000)
+  // profile.html doesn't have hero section, checkStatus is not needed here
+  // checkStatus();setInterval(checkStatus,30000)
 
   function checkStats(){
     api('/admin/stats',{method:'GET',noAuth:true}).then(function(d){

@@ -688,7 +688,7 @@ select.inp:focus,input.inp:focus{border-color:rgba(255,255,255,.15)}
     }).catch(function(){})
   }
   window.dashDelKey=function(id){if(!confirm('Delete?'))return;api('/admin/keys/delete',{method:'POST',body:JSON.stringify({keyId:id})}).then(function(d){if(d.ok){toast('Key deleted',1);loadDashKeys()}}).catch(function(){})};
-  id('dashGenKeyBtn').addEventListener('click',function(){
+  var _el=id('dashGenKeyBtn');if(_el)_el.addEventListener('click',function(){
     var role=prompt('Role:','PREMIUM')||'PREMIUM',days=parseInt(prompt('Days:','30'))||30,count=parseInt(prompt('Count:','1'))||1;
     api('/admin/keys/generate',{method:'POST',body:JSON.stringify({role,days,count})}).then(function(d){if(d.ok){toast(count+' key(s) generated',1);loadDashKeys()}}).catch(function(){toast('Route pending','err')})
   });
@@ -701,7 +701,7 @@ select.inp:focus,input.inp:focus{border-color:rgba(255,255,255,.15)}
       join(''):'<tr><td colspan="5" style="text-align:center;color:var(--dim);padding:16px">No actions logged</td></tr>'
     }).catch(function(){})
   }
-  id('dashClearJournal').addEventListener('click',function(){if(!confirm('Clear all entries?'))return;api('/admin/journal/clear',{method:'POST'}).then(function(d){if(d.ok){toast('Journal cleared',1);loadDashJournal()}}).catch(function(){})});
+  var _el=id('dashClearJournal');if(_el)_el.addEventListener('click',function(){if(!confirm('Clear all entries?'))return;api('/admin/journal/clear',{method:'POST'}).then(function(d){if(d.ok){toast('Journal cleared',1);loadDashJournal()}}).catch(function(){})});
 
   /* ─── BOOT ───────────────────────────────────────────────── */
   if(tok()){window.location.href='profile.html'}
