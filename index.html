@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="ru">
 <head>
 <meta charset="UTF-8" />
@@ -247,6 +247,8 @@ select.inp:focus,input.inp:focus{border-color:rgba(255,255,255,.15)}
   .stat-c{min-width:calc(50% - 10px)}
   .modal{width:calc(100% - 32px);padding:28px 20px}
 }
+body.auth-dash .hero,
+body.auth-dash .section{display:none!important}
 </style>
 </head>
 <body>
@@ -296,6 +298,18 @@ select.inp:focus,input.inp:focus{border-color:rgba(255,255,255,.15)}
     <button class="nav-btn pr" id="navAuthBtn">Sign In</button>
   </div>
 </nav>
+<script>
+(function(){
+  try {
+    var t=localStorage.getItem('authToken');
+    if(!t)return;
+    var d=JSON.parse(atob(t.split('.')[1].replace(/-/g,'+').replace(/_/g,'/')));
+    if(!d||!d.id)return;
+    window.__AU={id:d.id,username:d.username||'User',role:d.role||'DEFAULT'};
+    document.body.classList.add('auth-dash');
+  }catch(e){}
+})();
+</script>
 
 <!-- ─── HERO ───────────────────────────────────── -->
 <section class="hero">
@@ -420,9 +434,9 @@ select.inp:focus,input.inp:focus{border-color:rgba(255,255,255,.15)}
   function decodeToken(t){
     try{return JSON.parse(atob(t.split('.')[1].replace(/-/g,'+').replace(/_/g,'/')))}catch(e){return null}
   }
-  function api(path,opts){opts=opts||{};var h={'Content-Type':'application/json','Authorization':'Bearer '+tok()};if(opts.headers)for(var k in opts.headers)h[k]=opts.headers[k];
+  function api(path,opts){opts=opts||{};var h={'Content-Type':'application/json','Authorization':'Bearer '+tok()};if(opts.headers)for(var k in opts.headers)h[k]=opts.headers[k];var na=opts.noAuth;
     return fetch(API+path,Object.assign({},opts,{headers:h})).then(function(r){
-      if(r.status===401||r.status===403){if(document.querySelector('.modal-overlay.show')===null)logout();throw new Error('unauthorized')}return r.json()})}
+      if(r.status===401||r.status===403){if(!na&&document.querySelector('.modal-overlay.show')===null)logout();throw new Error('unauthorized')}return r.json()})}
 
   function toast(msg,ok){var el=document.getElementById('toast');el.textContent=msg;el.className='toast '+(ok?'ok':'err')+' show';clearTimeout(timer);timer=setTimeout(function(){el.classList.remove('show')},3000)}
   function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
@@ -456,7 +470,7 @@ select.inp:focus,input.inp:focus{border-color:rgba(255,255,255,.15)}
   checkStatus();setInterval(checkStatus,30000)
 
   function checkStats(){
-    api('/admin/stats',{method:'GET'}).then(function(d){
+    api('/admin/stats',{method:'GET',noAuth:true}).then(function(d){
       id('sbUsers').innerHTML='<span class="dt"></span> '+(d.active_users||d.users||0)+' users'
     }).catch(function(){})
   }
@@ -517,7 +531,7 @@ select.inp:focus,input.inp:focus{border-color:rgba(255,255,255,.15)}
   /* ── Logout ───────────────────────────────────────────────── */
   function logout(){
     if(!user)return;
-    localStorage.removeItem(TOKEN_KEY);localStorage.removeItem('authUserId');user=null;toast('Signed out',1);renderLanding()
+    localStorage.removeItem(TOKEN_KEY);localStorage.removeItem('authUserId');user=null;document.body.classList.remove('auth-dash');toast('Signed out',1);renderLanding()
   }
 
   /* ═══════════════════════════════════════════════════════════
@@ -525,6 +539,7 @@ select.inp:focus,input.inp:focus{border-color:rgba(255,255,255,.15)}
      ═══════════════════════════════════════════════════════════ */
 
   function renderLanding(){
+    document.body.classList.remove('auth-dash');
     id('navRight').innerHTML='<button class="nav-btn" onclick="scrollToSection(\'features\')">Features</button><button class="nav-btn" onclick="scrollToSection(\'showcase\')">Showcase</button><button class="nav-btn pr" id="navAuthBtn">Sign In</button>';
     id('navAuthBtn').addEventListener('click',openAuth);
     var dw=id('dashWrap');if(dw)dw.remove();
@@ -588,7 +603,7 @@ select.inp:focus,input.inp:focus{border-color:rgba(255,255,255,.15)}
     }
     if(!myId){
       // Fallback: use token-based endpoint that reads user id from JWT directly
-      api('/endpoints/profile.php').then(function(d){
+      api('/endpoints/profile.php',{noAuth:true}).then(function(d){
         if(!d.success||!d.user)return;
         user=d.user;
         localStorage.setItem('authUserId',user.id);
@@ -596,13 +611,13 @@ select.inp:focus,input.inp:focus{border-color:rgba(255,255,255,.15)}
       }).catch(function(){})
       return
     }
-    api('/profile/'+myId).then(function(d){
+    api('/profile/'+myId,{noAuth:true}).then(function(d){
       if(!d.user)return;user=d.user;
       localStorage.setItem('authUserId',user.id);
       updDashAfterProfile()
     }).catch(function(){
       // Fallback: try token-based endpoint
-      api('/endpoints/profile.php').then(function(d){
+      api('/endpoints/profile.php',{noAuth:true}).then(function(d){
         if(!d.success||!d.user)return;
         user=d.user;
         localStorage.setItem('authUserId',user.id);
@@ -629,8 +644,8 @@ select.inp:focus,input.inp:focus{border-color:rgba(255,255,255,.15)}
       '<div class="dash-card"><div class="dash-card-t">Profile</div><div class="row"><span class="rl">Username</span><span style="font-size:12px">'+esc(user?user.username:'—')+'</span></div><div class="row"><span class="rl">Email</span><span style="font-size:12px">'+esc(user?user.email:'—')+'</span></div><div class="row"><span class="rl">Role</span><span class="badge'+(user&&(user.role==='ADMIN'||user.role==='DEVELOPER')?' s':'')+'">'+esc(user?user.role:'—')+'</span></div><div class="row"><span class="rl">Subscription</span><span class="badge '+(user&&user.subscription_active?'s':'')+'">'+(user&&user.subscription_active?'Active':'Inactive')+'</span></div></div>'+
       '<div class="dash-card"><div class="dash-card-t">Manifest</div><div class="row"><span class="rl">Client Version</span><span style="font-size:12px" id="dvClient">—</span></div><div class="row"><span class="rl">Game Version</span><span style="font-size:12px" id="dvGame">—</span></div></div>'+
       '<div class="dash-card"><div class="dash-card-t">Launcher</div><div class="row" style="justify-content:center;padding:8px 0"><a class="btn-s g" id="dashDlLoader" href="#" target="_blank" style="text-decoration:none;display:inline-flex;align-items:center;gap:6px"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Download Launcher</a></div></div>';
-    api('/admin/stats').then(function(d){id('dvUsers').textContent=d.users||0}).catch(function(){});
-    api('/loader/versions').then(function(d){id('dvVers').textContent=(d.allowed_versions||[]).length}).catch(function(){id('dvVers').textContent='0'});
+    api('/admin/stats',{noAuth:true}).then(function(d){id('dvUsers').textContent=d.users||0}).catch(function(){});
+    api('/loader/versions',{noAuth:true}).then(function(d){id('dvVers').textContent=(d.allowed_versions||[]).length}).catch(function(){id('dvVers').textContent='0'});
     id('dvStatus').textContent='Online';
     fetch('/launcher_storage/release/manifest.json').then(function(r){return r.json()}).then(function(d){id('dvClient').textContent=d.client_version||'—';id('dvGame').textContent=d.version||'—'}).catch(function(){})
     api('/download/loader').then(function(r){return r.json()}).then(function(d){if(d.url){id('dashDlLoader').href=d.url}}).catch(function(){});
@@ -706,7 +721,17 @@ select.inp:focus,input.inp:focus{border-color:rgba(255,255,255,.15)}
   /* ═══════════════════════════════════════════════════════════
      BOOT
      ═══════════════════════════════════════════════════════════ */
-  if(tok()){initDash()}
+  var au=window.__AU;
+  if(au){
+    user={id:au.id,username:au.username||'User',role:au.role||'DEFAULT'};
+    localStorage.setItem('authUserId',user.id);
+    var n=user.username;
+    id('navRight').innerHTML='<span style="font-size:12px;font-weight:500;color:rgba(255,255,255,.5);cursor:default">'+esc(n)+'</span><button class="nav-btn d" id="navDashLogout">Sign Out</button>';
+    id('navDashLogout').addEventListener('click',logout);
+    initDash()
+  } else if(tok()){
+    initDash()
+  }
 })();
 </script>
 </body>
