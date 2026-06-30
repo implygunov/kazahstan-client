@@ -37,7 +37,22 @@ app.use('/api', require('./routes/payments'));
 app.use('/api', require('./routes/download'));
 app.use('/api', require('./routes/loader'));
 
-// ── Release manifest for the native Kazahstan DLC (release_service.cpp) ──
+// ── Static files (manifest.json, index.html, assets) ──────────────────────
+// Static manifest.json at /launcher_storage/release/manifest.json wins first.
+// If missing — falls through to the dynamic route below.
+app.use(express.static(path.join(__dirname, '..'), {
+  index: false,
+  setHeaders: (res, filePath) => {
+    const ext = path.extname(filePath).toLowerCase();
+    if (ext === '.html') res.set('Content-Type', 'text/html; charset=utf-8');
+    else if (ext === '.css') res.set('Content-Type', 'text/css; charset=utf-8');
+    else if (ext === '.js') res.set('Content-Type', 'application/javascript; charset=utf-8');
+    else if (ext === '.svg') res.set('Content-Type', 'image/svg+xml; charset=utf-8');
+    else if (ext === '.json') res.set('Content-Type', 'application/json; charset=utf-8');
+  }
+}));
+
+// ── Release manifest — fallback if no static manifest.json ────────────────
 // The loader GETs this, then downloads files.zip (base game) and the protected
 // jar from the ABSOLUTE urls below. Big files live on a CDN (GitHub Releases /
 // Cloudflare R2) — set the urls via env on Render. Bump *_version to force a
@@ -54,17 +69,6 @@ app.get('/launcher_storage/release/manifest.json', (req, res) => {
     jar_relative_path: process.env.JAR_RELATIVE_PATH || 'builds/Aura/game/mods/Kazahstan-obf-2.4.jar',
   });
 });
-
-app.use(express.static(path.join(__dirname, '..'), {
-  index: false,
-  setHeaders: (res, filePath) => {
-    const ext = path.extname(filePath).toLowerCase();
-    if (ext === '.html') res.set('Content-Type', 'text/html; charset=utf-8');
-    else if (ext === '.css') res.set('Content-Type', 'text/css; charset=utf-8');
-    else if (ext === '.js') res.set('Content-Type', 'application/javascript; charset=utf-8');
-    else if (ext === '.svg') res.set('Content-Type', 'image/svg+xml; charset=utf-8');
-  }
-}));
 
 function sendIndex(res) {
   let html = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
