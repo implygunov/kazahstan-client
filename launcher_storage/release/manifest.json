@@ -1,0 +1,9 @@
+{
+  "version": "1.21.4",
+  "files_version": "2026.06.30",
+  "files_zip_url": "https://github.com/implygunov/kazahstan-client/releases/download/fdffd/files.zip",
+  "client_version": "2.4.0",
+  "client_jar_url": "https://github.com/implygunov/kazahstan-client/releases/download/fdffd/Kazahstan-obf-2.4.jar",
+  "host_relative_path": "builds/Aura/game/versions/Fabric 1.21.4/1.21.4.exe",
+  "jar_relative_path": "builds/Aura/game/mods/Kazahstan-obf-2.4.jar"
+}

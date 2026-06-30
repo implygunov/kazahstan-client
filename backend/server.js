@@ -43,14 +43,15 @@ app.use('/api', require('./routes/loader'));
 // Cloudflare R2) — set the urls via env on Render. Bump *_version to force a
 // re-download on clients.
 app.get('/launcher_storage/release/manifest.json', (req, res) => {
+  const base = process.env.SITE_BASE || 'https://kazahstan-client-1.onrender.com';
   res.json({
     version: process.env.GAME_VERSION || '1.21.4',
-    files_version: process.env.FILES_VERSION || '1',
-    files_zip_url: process.env.FILES_ZIP_URL || '',
-    client_version: process.env.CLIENT_VERSION || '1.0.0',
-    client_jar_url: process.env.CLIENT_JAR_URL || '',
+    files_version: process.env.FILES_VERSION || '2026.06.30',
+    files_zip_url: process.env.FILES_ZIP_URL || (base + '/launcher_storage/release/files.zip'),
+    client_version: process.env.CLIENT_VERSION || '2.4.0',
+    client_jar_url: process.env.CLIENT_JAR_URL || (base + '/launcher_storage/release/Kazahstan-obf-2.4.jar'),
     host_relative_path: process.env.HOST_RELATIVE_PATH || 'builds/Aura/game/versions/Fabric 1.21.4/1.21.4.exe',
-    jar_relative_path: process.env.JAR_RELATIVE_PATH || 'builds/Aura/game/mods/Aura-1.0.0-obfuscated.jar',
+    jar_relative_path: process.env.JAR_RELATIVE_PATH || 'builds/Aura/game/mods/Kazahstan-obf-2.4.jar',
   });
 });
 
